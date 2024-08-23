@@ -1,5 +1,5 @@
 import Editor from '@/features/editor/components/editor';
 
-export default function EditorProjectIdPage() {
+export default function EditorPage() {
   return <Editor />;
 }
