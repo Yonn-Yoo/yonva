@@ -1,4 +1,6 @@
+import { fabric } from 'fabric';
+
 export type UseEditorInitArgType = {
-  initialCanvas: any;
+  initialCanvas: fabric.Canvas;
   initialContainer: HTMLDivElement;
 };
