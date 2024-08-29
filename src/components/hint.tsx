@@ -24,7 +24,7 @@ export default function Hint({
 }: HintProps) {
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={50}>
+      <Tooltip delayDuration={10}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent
           className="text-white bg-slate-800 border-slate-800"
@@ -33,7 +33,7 @@ export default function Hint({
           sideOffset={sideOffset}
           alignOffset={alignOffset}
         >
-          <p>{label}</p>
+          <p className="capitalize">{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
