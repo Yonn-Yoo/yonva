@@ -1,4 +1,6 @@
 import { fabric } from 'fabric';
+import { LucideProps } from 'lucide-react';
+import { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export type UseEditorInitArgType = {
   initialCanvas: fabric.Canvas;
@@ -21,3 +23,7 @@ export type ToolType =
   | 'ai'
   | 'remove-bg'
   | 'templates';
+
+export type LucidIconType = ForwardRefExoticComponent<
+  Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+>;

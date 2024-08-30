@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 import {
   ChevronDown,
   Download,
@@ -18,9 +19,15 @@ import {
 } from 'lucide-react';
 import { BsCloudCheck } from 'react-icons/bs';
 import { CiFileOn } from 'react-icons/ci';
+import { ToolType } from '../types';
 import Logo from './logo';
 
-export default function Navbar() {
+type Props = {
+  activeTool: ToolType;
+  onChangeActiveTool: (tool: ToolType) => void;
+};
+
+export default function Navbar({ activeTool, onChangeActiveTool }: Props) {
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
       <Logo />
@@ -52,8 +59,8 @@ export default function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => {}}
-            className="" //TODO: add dynamic class
+            onClick={() => onChangeActiveTool('select')}
+            className={cn(activeTool === 'select' && 'bg-gray-100')}
           >
             <MousePointerClick className="size-5" />
           </Button>

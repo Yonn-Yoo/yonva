@@ -9,8 +9,50 @@ import {
   Sparkles,
   Type,
 } from 'lucide-react';
-import { ToolType } from '../types';
+import { LucidIconType, ToolType } from '../types';
 import SidebarItem from './sidebar-item';
+
+const sidebarItems: {
+  icon: LucidIconType;
+  label: string;
+  toolName: ToolType;
+}[] = [
+  {
+    icon: LayoutTemplate,
+    label: 'Design',
+    toolName: 'templates',
+  },
+  {
+    icon: ImageIcon,
+    label: 'Image',
+    toolName: 'images',
+  },
+  {
+    icon: Type,
+    label: 'Text',
+    toolName: 'text',
+  },
+  {
+    icon: Shapes,
+    label: 'Shapes',
+    toolName: 'shapes',
+  },
+  {
+    icon: Pencil,
+    label: 'Draw',
+    toolName: 'draw',
+  },
+  {
+    icon: Sparkles,
+    label: 'AI',
+    toolName: 'ai',
+  },
+  {
+    icon: Settings,
+    label: 'Settings',
+    toolName: 'settings',
+  },
+];
 
 type Props = {
   activeTool: ToolType;
@@ -21,48 +63,15 @@ export default function Sidebar({ activeTool, onChangeActiveTool }: Props) {
   return (
     <aside className="bg-white flex flex-col w-[100px] h-full border-r overflow-y-auto">
       <ul className="flex flex-col">
-        <SidebarItem
-          icon={LayoutTemplate}
-          label="Design"
-          isActive={activeTool === 'templates'}
-          onClick={() => onChangeActiveTool('templates')}
-        />
-        <SidebarItem
-          icon={ImageIcon}
-          label="Image"
-          isActive={activeTool === 'images'}
-          onClick={() => onChangeActiveTool('images')}
-        />
-        <SidebarItem
-          icon={Type}
-          label="Text"
-          isActive={activeTool === 'text'}
-          onClick={() => onChangeActiveTool('text')}
-        />
-        <SidebarItem
-          icon={Shapes}
-          label="Shapes"
-          isActive={activeTool === 'shapes'}
-          onClick={() => onChangeActiveTool('shapes')}
-        />
-        <SidebarItem
-          icon={Pencil}
-          label="Draw"
-          isActive={activeTool === 'draw'}
-          onClick={() => onChangeActiveTool('draw')}
-        />
-        <SidebarItem
-          icon={Sparkles}
-          label="AI"
-          isActive={activeTool === 'ai'}
-          onClick={() => onChangeActiveTool('ai')}
-        />
-        <SidebarItem
-          icon={Settings}
-          label="Settings"
-          isActive={activeTool === 'settings'}
-          onClick={() => onChangeActiveTool('settings')}
-        />
+        {sidebarItems.map(({ icon, label, toolName }) => (
+          <SidebarItem
+            key={toolName}
+            icon={icon}
+            label={label}
+            isActive={activeTool === toolName}
+            onClick={() => onChangeActiveTool(toolName)}
+          />
+        ))}
       </ul>
     </aside>
   );
