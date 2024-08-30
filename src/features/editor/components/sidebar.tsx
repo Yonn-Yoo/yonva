@@ -3,17 +3,18 @@
 import {
   ImageIcon,
   LayoutTemplate,
+  LucideIcon,
   Pencil,
   Settings,
   Shapes,
   Sparkles,
   Type,
 } from 'lucide-react';
-import { LucidIconType, ToolType } from '../types';
+import { ToolType } from '../types';
 import SidebarItem from './sidebar-item';
 
 const sidebarItems: {
-  icon: LucidIconType;
+  icon: LucideIcon;
   label: string;
   toolName: ToolType;
 }[] = [
