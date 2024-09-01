@@ -9,7 +9,7 @@ import ToolSidebarClose from './tool-sidebar-close';
 import ToolSidebarHeader from './tool-sidebar-header';
 
 type Props = {
-  editor: Editor;
+  editor: Editor | undefined;
   activeTool: ToolType;
   onChangeActiveTool: (tool: ToolType) => void;
 };

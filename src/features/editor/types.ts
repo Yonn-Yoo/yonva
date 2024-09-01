@@ -54,13 +54,25 @@ export const TRIANGLE_OPTIONS = {
 
 export type BuildEditorType = {
   canvas: fabric.Canvas | null;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+  setFillColor: (value: string) => void;
+  setStrokeColor: (value: string) => void;
+  setStrokeWidth: (value: number) => void;
 };
 
 export type Editor = {
+  changeFillColor: (value: string) => void;
+  changeStrokeColor: (value: string) => void;
+  changeStrokeWidth: (value: number) => void;
   addCircle: () => void;
   addSoftRectangle: () => void;
   addRectangle: () => void;
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
 };
