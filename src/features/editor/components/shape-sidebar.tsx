@@ -34,22 +34,37 @@ export default function ShapeSidebar({
       />
       <ScrollArea>
         <div className="grid grid-cols-3 gap-4 p-4">
-          <ShapeTool onClick={() => editor?.addCircle()} icon={FaCircle} />
           <ShapeTool
+            editor={editor}
+            onClick={() => editor?.addCircle()}
+            icon={FaCircle}
+          />
+          <ShapeTool
+            editor={editor}
             onClick={() => editor?.addSoftRectangle()}
             icon={FaSquare}
           />
           <ShapeTool
+            editor={editor}
             onClick={() => editor?.addRectangle()}
             icon={FaSquareFull}
           />
-          <ShapeTool onClick={() => editor?.addTriangle()} icon={IoTriangle} />
           <ShapeTool
+            editor={editor}
+            onClick={() => editor?.addTriangle()}
+            icon={IoTriangle}
+          />
+          <ShapeTool
+            editor={editor}
             onClick={() => editor?.addInverseTriangle()}
             icon={IoTriangle}
             iconClassName="rotate-180"
           />
-          <ShapeTool onClick={() => editor?.addDiamond()} icon={FaDiamond} />
+          <ShapeTool
+            editor={editor}
+            onClick={() => editor?.addDiamond()}
+            icon={FaDiamond}
+          />
         </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />

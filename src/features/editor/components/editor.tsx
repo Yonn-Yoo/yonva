@@ -4,6 +4,7 @@ import { fabric } from 'fabric';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
 import { ToolType } from '../types';
+import FillColorSidebar from './fill-color-sidebar';
 import Footer from './footer';
 import Navbar from './navbar';
 import ShapeSidebar from './shape-sidebar';
@@ -59,16 +60,23 @@ export default function Editor() {
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
         />
-        {activeTool === 'shapes' && (
-          <ShapeSidebar
-            editor={editor}
-            onChangeActiveTool={onChangeActiveTool}
-            activeTool={activeTool}
-          />
-        )}
-
+        <ShapeSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <FillColorSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
-          <Toolbar />
+          <Toolbar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+            key={JSON.stringify(editor?.canvas?.getActiveObject())}
+          />
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
             ref={containerRef}

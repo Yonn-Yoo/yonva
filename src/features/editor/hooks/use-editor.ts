@@ -21,6 +21,7 @@ const buildEditor = ({
   setFillColor,
   setStrokeColor,
   setStrokeWidth,
+  selectedObjects,
 }: BuildEditorType): Editor => {
   const getWorkSpace = () => {
     return canvas?.getObjects().find((obj) => obj.name === 'clip');
@@ -48,6 +49,7 @@ const buildEditor = ({
       canvas?.getActiveObjects().forEach((obj) => {
         obj.set({ fill: value });
       });
+      canvas?.renderAll();
     },
     changeStrokeColor: (value: string) => {
       setStrokeColor(value);
@@ -56,31 +58,41 @@ const buildEditor = ({
           obj.set({ fill: value });
           return;
         }
-
         obj.set({ stroke: value });
       });
+      canvas?.renderAll();
     },
     changeStrokeWidth: (value: number) => {
       setStrokeWidth(value);
       canvas?.getActiveObjects().forEach((obj) => {
         obj.set({ strokeWidth: value });
       });
+      canvas?.renderAll();
     },
     addCircle: () => {
       const object = new fabric.Circle({
         ...CIRCLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
       });
       addToCanvas(object);
     },
     addRectangle: () => {
       const object = new fabric.Rect({
         ...RECT_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
       });
       addToCanvas(object);
     },
     addSoftRectangle: () => {
       const object = new fabric.Rect({
         ...RECT_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
         rx: 6,
         ry: 6,
       });
@@ -89,12 +101,18 @@ const buildEditor = ({
     addTriangle: () => {
       const object = new fabric.Triangle({
         ...TRIANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
       });
       addToCanvas(object);
     },
     addInverseTriangle: () => {
       const object = new fabric.Triangle({
         ...TRIANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth,
         flipY: true,
       });
       addToCanvas(object);
@@ -107,10 +125,30 @@ const buildEditor = ({
           { x: 65, y: 130 },
           { x: 0, y: 65 },
         ],
-        { ...RECT_OPTIONS, strokeLineJoin: 'round', strokeWidth: 10 }
+        {
+          ...RECT_OPTIONS,
+          strokeLineJoin: 'round',
+          fill: fillColor,
+          stroke: strokeColor,
+          strokeWidth,
+        }
       );
       addToCanvas(objec);
     },
+    getActiveFillColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fillColor;
+      }
+
+      const value = selectedObject.get('fill') || fillColor;
+
+      // Currently, gradients & patterns are not supported
+      return value as string;
+    },
+    selectedObjects,
+    canvas,
     fillColor,
     strokeColor,
     strokeWidth,
@@ -146,9 +184,10 @@ export default function useEditor() {
           setFillColor,
           setStrokeColor,
           setStrokeWidth,
+          selectedObjects,
         })
       : undefined;
-  }, [canvas, fillColor, strokeColor, strokeWidth]);
+  }, [canvas, fillColor, strokeColor, strokeWidth, selectedObjects]);
 
   const init = useCallback(
     ({ initialCanvas, initialContainer }: UseEditorInitArgType) => {
