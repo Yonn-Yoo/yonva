@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import {
   BuildEditorType,
   Editor,
+  EditorHookProps,
   FILL_COLOR,
   STROKE_COLOR,
   STROKE_WIDTH,
@@ -147,6 +148,18 @@ const buildEditor = ({
       // Currently, gradients & patterns are not supported
       return value as string;
     },
+    getActiveStrokeColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return fillColor;
+      }
+
+      const value = selectedObject.get('stroke') || strokeColor;
+
+      // Currently, gradients & patterns are not supported
+      return value as string;
+    },
     selectedObjects,
     canvas,
     fillColor,
@@ -155,7 +168,7 @@ const buildEditor = ({
   };
 };
 
-export default function useEditor() {
+export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
@@ -170,8 +183,8 @@ export default function useEditor() {
 
   useCanvasEvents({
     canvas,
-    container,
     setSelectedObjects,
+    clearSelectionCallback,
   });
 
   const editor = useMemo(() => {

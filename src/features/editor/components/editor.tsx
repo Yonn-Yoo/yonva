@@ -3,19 +3,29 @@
 import { fabric } from 'fabric';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
-import { ToolType } from '../types';
+import { ToolType, selectionDependentTools } from '../types';
 import FillColorSidebar from './fill-color-sidebar';
 import Footer from './footer';
 import Navbar from './navbar';
 import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
+import StrokeColorSidebar from './stroke-color-sidebar';
 import Toolbar from './toolbar';
 
 export default function Editor() {
-  const { init, editor } = useEditor();
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [activeTool, setActiveTool] = useState<ToolType>('select');
+
+  const onClearSelection = useCallback(() => {
+    if (selectionDependentTools.includes(activeTool)) {
+      setActiveTool('select');
+    }
+  }, [activeTool]);
+
+  const { init, editor } = useEditor({
+    clearSelectionCallback: onClearSelection,
+  });
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current, {
@@ -66,6 +76,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <FillColorSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <StrokeColorSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
