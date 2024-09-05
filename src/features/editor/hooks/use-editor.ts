@@ -48,18 +48,29 @@ const buildEditor = ({
   };
 
   return {
+    changeOpacity: (value: number) => {
+      canvas?.getActiveObjects().forEach((obj) => {
+        obj.set({ opacity: value });
+      });
+      canvas?.renderAll();
+    },
     bringForward: () => {
       canvas?.getActiveObjects().forEach((obj) => {
         canvas.bringForward(obj);
       });
       canvas?.renderAll();
-      // TODO: fix workspace overflow
+
+      const workspace = getWorkSpace();
+      workspace?.sendToBack();
     },
     sendBackwards: () => {
       canvas?.getActiveObjects().forEach((obj) => {
         canvas.sendBackwards(obj);
       });
       canvas?.renderAll();
+
+      const workspace = getWorkSpace();
+      workspace?.sendToBack();
     },
     changeFillColor: (value: string) => {
       setFillColor(value);
@@ -205,6 +216,16 @@ const buildEditor = ({
       }
 
       const value = selectedObject.get('strokeDashArray') || strokeDashArray;
+      return value;
+    },
+    getActiveOpactiy: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return 1;
+      }
+
+      const value = selectedObject.get('opacity') || 1;
       return value;
     },
     selectedObjects,

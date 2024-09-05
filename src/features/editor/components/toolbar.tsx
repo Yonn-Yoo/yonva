@@ -3,7 +3,9 @@
 import Hint from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import { BsBorderWidth } from 'react-icons/bs';
+import { RxTransparencyGrid } from 'react-icons/rx';
 import { Editor, ToolType } from '../types';
 
 type Props = {
@@ -64,6 +66,33 @@ export default function Toolbar({
             className={cn(activeTool === 'stroke-width' && 'bg-gray-100')}
           >
             <BsBorderWidth className="size-4" />
+          </Button>
+        </Hint>
+        <Hint label="forward" side="bottom">
+          <Button
+            onClick={() => editor?.bringForward()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowUp className="size-5" />
+          </Button>
+        </Hint>
+        <Hint label="backwards" side="bottom">
+          <Button
+            onClick={() => editor?.sendBackwards()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowDown className="size-5" />
+          </Button>
+        </Hint>
+        <Hint label="opacity" side="bottom">
+          <Button
+            onClick={() => onChangeActiveTool('opacity')}
+            size="icon"
+            variant="ghost"
+          >
+            <RxTransparencyGrid className="size-4" />
           </Button>
         </Hint>
       </div>

@@ -104,6 +104,7 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  changeOpacity: (value: number) => void;
   bringForward: () => void;
   sendBackwards: () => void;
   changeFillColor: (value: string) => void;
@@ -120,6 +121,7 @@ export type Editor = {
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
   getActiveStrokeDashArray: () => number[];
+  getActiveOpactiy: () => number;
   selectedObjects: fabric.Object[];
   canvas: fabric.Canvas | null;
 };

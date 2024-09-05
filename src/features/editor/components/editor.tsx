@@ -7,6 +7,7 @@ import { ToolType, selectionDependentTools } from '../types';
 import FillColorSidebar from './fill-color-sidebar';
 import Footer from './footer';
 import Navbar from './navbar';
+import OpacitySidebar from './opacity-sidebar';
 import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
 import StrokeColorSidebar from './stroke-color-sidebar';
@@ -87,6 +88,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <StrokeWidthSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <OpacitySidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
