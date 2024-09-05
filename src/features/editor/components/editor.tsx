@@ -10,6 +10,7 @@ import Navbar from './navbar';
 import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
 import StrokeColorSidebar from './stroke-color-sidebar';
+import StrokeWidthSidebar from './stroke-width-sidebar';
 import Toolbar from './toolbar';
 
 export default function Editor() {
@@ -81,6 +82,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <StrokeColorSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <StrokeWidthSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}

@@ -1,6 +1,6 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
-import { Editor, FILL_COLOR, ToolType } from '../types';
+import { Editor, STROKE_COLOR, ToolType } from '../types';
 import ColorPicker from './color-picker';
 import ToolSidebarClose from './tool-sidebar-close';
 import ToolSidebarHeader from './tool-sidebar-header';
@@ -16,7 +16,7 @@ export default function StrokeColorSidebar({
   activeTool,
   onChangeActiveTool,
 }: Props) {
-  const value = editor?.getActiveFillColor() || FILL_COLOR;
+  const value = editor?.getActiveStrokeColor() || STROKE_COLOR;
   const onClose = () => onChangeActiveTool('select');
   const onChange = (value: string) => editor?.changeStrokeColor(value);
 
@@ -29,7 +29,7 @@ export default function StrokeColorSidebar({
     >
       <ToolSidebarHeader
         title="Stroke color"
-        description="Fill stroke color to your element"
+        description="Add stroke color to your element"
       />
       <ScrollArea>
         <div className="p-4 space-y-6">

@@ -6,6 +6,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   STROKE_COLOR,
+  STROKE_DASH_ARRAY,
   STROKE_WIDTH,
   UseEditorInitArgType,
 } from '../types';
@@ -19,9 +20,11 @@ const buildEditor = ({
   fillColor,
   strokeColor,
   strokeWidth,
+  strokeDashArray,
   setFillColor,
   setStrokeColor,
   setStrokeWidth,
+  setStrokeDashArray,
   selectedObjects,
 }: BuildEditorType): Editor => {
   const getWorkSpace = () => {
@@ -45,6 +48,19 @@ const buildEditor = ({
   };
 
   return {
+    bringForward: () => {
+      canvas?.getActiveObjects().forEach((obj) => {
+        canvas.bringForward(obj);
+      });
+      canvas?.renderAll();
+      // TODO: fix workspace overflow
+    },
+    sendBackwards: () => {
+      canvas?.getActiveObjects().forEach((obj) => {
+        canvas.sendBackwards(obj);
+      });
+      canvas?.renderAll();
+    },
     changeFillColor: (value: string) => {
       setFillColor(value);
       canvas?.getActiveObjects().forEach((obj) => {
@@ -70,12 +86,20 @@ const buildEditor = ({
       });
       canvas?.renderAll();
     },
+    changeStrokeDashArray: (value: number[]) => {
+      setStrokeDashArray(value);
+      canvas?.getActiveObjects().forEach((obj) => {
+        obj.set({ strokeDashArray: value });
+      });
+      canvas?.renderAll();
+    },
     addCircle: () => {
       const object = new fabric.Circle({
         ...CIRCLE_OPTIONS,
         fill: fillColor,
         stroke: strokeColor,
         strokeWidth,
+        strokeDashArray,
       });
       addToCanvas(object);
     },
@@ -85,6 +109,7 @@ const buildEditor = ({
         fill: fillColor,
         stroke: strokeColor,
         strokeWidth,
+        strokeDashArray,
       });
       addToCanvas(object);
     },
@@ -94,6 +119,7 @@ const buildEditor = ({
         fill: fillColor,
         stroke: strokeColor,
         strokeWidth,
+        strokeDashArray,
         rx: 6,
         ry: 6,
       });
@@ -105,6 +131,7 @@ const buildEditor = ({
         fill: fillColor,
         stroke: strokeColor,
         strokeWidth,
+        strokeDashArray,
       });
       addToCanvas(object);
     },
@@ -115,11 +142,12 @@ const buildEditor = ({
         stroke: strokeColor,
         strokeWidth,
         flipY: true,
+        strokeDashArray,
       });
       addToCanvas(object);
     },
     addDiamond: () => {
-      const objec = new fabric.Polygon(
+      const object = new fabric.Polygon(
         [
           { x: 65, y: 0 },
           { x: 130, y: 65 },
@@ -132,9 +160,10 @@ const buildEditor = ({
           fill: fillColor,
           stroke: strokeColor,
           strokeWidth,
+          strokeDashArray,
         }
       );
-      addToCanvas(objec);
+      addToCanvas(object);
     },
     getActiveFillColor: () => {
       const selectedObject = selectedObjects[0];
@@ -152,19 +181,34 @@ const buildEditor = ({
       const selectedObject = selectedObjects[0];
 
       if (!selectedObject) {
-        return fillColor;
+        return strokeColor;
       }
 
       const value = selectedObject.get('stroke') || strokeColor;
+      return value;
+    },
+    getActiveStrokeWidth: () => {
+      const selectedObject = selectedObjects[0];
 
-      // Currently, gradients & patterns are not supported
-      return value as string;
+      if (!selectedObject) {
+        return strokeWidth;
+      }
+
+      const value = selectedObject.get('strokeWidth') || strokeWidth;
+      return value;
+    },
+    getActiveStrokeDashArray: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) {
+        return strokeDashArray;
+      }
+
+      const value = selectedObject.get('strokeDashArray') || strokeDashArray;
+      return value;
     },
     selectedObjects,
     canvas,
-    fillColor,
-    strokeColor,
-    strokeWidth,
   };
 };
 
@@ -175,6 +219,8 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   const [fillColor, setFillColor] = useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = useState(STROKE_COLOR);
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
+  const [strokeDashArray, setStrokeDashArray] =
+    useState<number[]>(STROKE_DASH_ARRAY);
 
   useAutoResize({
     canvas,
@@ -194,13 +240,22 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
           fillColor,
           strokeColor,
           strokeWidth,
+          strokeDashArray,
           setFillColor,
           setStrokeColor,
           setStrokeWidth,
+          setStrokeDashArray,
           selectedObjects,
         })
       : undefined;
-  }, [canvas, fillColor, strokeColor, strokeWidth, selectedObjects]);
+  }, [
+    canvas,
+    fillColor,
+    strokeColor,
+    strokeWidth,
+    strokeDashArray,
+    selectedObjects,
+  ]);
 
   const init = useCallback(
     ({ initialCanvas, initialContainer }: UseEditorInitArgType) => {
@@ -239,9 +294,9 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
       setCanvas(initialCanvas);
       setContainer(initialContainer);
 
-      const testText = new fabric.Text('hello world', {
-        fontWeight: 500,
-        fontSize: 16,
+      const testText = new fabric.Text('Hello world!', {
+        fontWeight: 600,
+        fontSize: 32,
       });
 
       initialCanvas.add(testText);

@@ -19,7 +19,7 @@ export default function ShapeTool({
   return (
     <button onClick={onClick} className="aspect-square border rounded-md p-5">
       <Icon
-        style={{ color: editor?.fillColor }}
+        style={{ color: editor?.getActiveFillColor() }}
         className={cn('w-full h-full', iconClassName)}
       />
     </button>

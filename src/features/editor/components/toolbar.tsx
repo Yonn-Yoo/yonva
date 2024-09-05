@@ -3,6 +3,7 @@
 import Hint from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { BsBorderWidth } from 'react-icons/bs';
 import { Editor, ToolType } from '../types';
 
 type Props = {
@@ -18,6 +19,7 @@ export default function Toolbar({
 }: Props) {
   const fillColor = editor?.getActiveFillColor();
   const strokeColor = editor?.getActiveStrokeColor();
+  const borderWidth = editor?.getActiveStrokeWidth();
 
   if (editor?.selectedObjects.length === 0) {
     return (
@@ -52,6 +54,16 @@ export default function Toolbar({
               className="rounded-sm size-4 border-2 bg-white"
               style={{ borderColor: strokeColor }}
             />
+          </Button>
+        </Hint>
+        <Hint label="border width" side="bottom">
+          <Button
+            onClick={() => onChangeActiveTool('stroke-width')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'stroke-width' && 'bg-gray-100')}
+          >
+            <BsBorderWidth className="size-4" />
           </Button>
         </Hint>
       </div>
