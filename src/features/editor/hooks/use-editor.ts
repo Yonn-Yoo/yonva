@@ -11,7 +11,12 @@ import {
   UseEditorInitArgType,
 } from '../types';
 import { isTextType } from '../utils';
-import { CIRCLE_OPTIONS, RECT_OPTIONS, TRIANGLE_OPTIONS } from './../types';
+import {
+  CIRCLE_OPTIONS,
+  RECT_OPTIONS,
+  TEXT_OPTIONS,
+  TRIANGLE_OPTIONS,
+} from './../types';
 import { useAutoResize } from './use-auto-resize';
 import useCanvasEvents from './use-canvas-events';
 
@@ -103,6 +108,13 @@ const buildEditor = ({
         obj.set({ strokeDashArray: value });
       });
       canvas?.renderAll();
+    },
+    addText: (value, options) => {
+      const object = new fabric.Text(value, {
+        ...TEXT_OPTIONS,
+        ...options,
+      });
+      addToCanvas(object);
     },
     addCircle: () => {
       const object = new fabric.Circle({

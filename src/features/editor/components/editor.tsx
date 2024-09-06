@@ -12,6 +12,7 @@ import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
 import StrokeColorSidebar from './stroke-color-sidebar';
 import StrokeWidthSidebar from './stroke-width-sidebar';
+import TextSidebar from './text-sidebar';
 import Toolbar from './toolbar';
 
 export default function Editor() {
@@ -93,6 +94,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <OpacitySidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <TextSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}

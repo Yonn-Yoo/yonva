@@ -7,6 +7,7 @@ import { ArrowDown, ArrowUp } from 'lucide-react';
 import { BsBorderWidth } from 'react-icons/bs';
 import { RxTransparencyGrid } from 'react-icons/rx';
 import { Editor, ToolType } from '../types';
+import { isTextType } from '../utils';
 
 type Props = {
   editor: Editor | undefined;
@@ -21,7 +22,8 @@ export default function Toolbar({
 }: Props) {
   const fillColor = editor?.getActiveFillColor();
   const strokeColor = editor?.getActiveStrokeColor();
-  const borderWidth = editor?.getActiveStrokeWidth();
+  const objectType = editor?.selectedObjects[0]?.type;
+  const isText = isTextType(objectType);
 
   if (editor?.selectedObjects.length === 0) {
     return (
@@ -45,29 +47,33 @@ export default function Toolbar({
             />
           </Button>
         </Hint>
-        <Hint label="border color" side="bottom">
-          <Button
-            onClick={() => onChangeActiveTool('stroke-color')}
-            size="icon"
-            variant="ghost"
-            className={cn(activeTool === 'stroke-color' && 'bg-gray-100')}
-          >
-            <div
-              className="rounded-sm size-4 border-2 bg-white"
-              style={{ borderColor: strokeColor }}
-            />
-          </Button>
-        </Hint>
-        <Hint label="border width" side="bottom">
-          <Button
-            onClick={() => onChangeActiveTool('stroke-width')}
-            size="icon"
-            variant="ghost"
-            className={cn(activeTool === 'stroke-width' && 'bg-gray-100')}
-          >
-            <BsBorderWidth className="size-4" />
-          </Button>
-        </Hint>
+        {!isText && (
+          <>
+            <Hint label="border color" side="bottom">
+              <Button
+                onClick={() => onChangeActiveTool('stroke-color')}
+                size="icon"
+                variant="ghost"
+                className={cn(activeTool === 'stroke-color' && 'bg-gray-100')}
+              >
+                <div
+                  className="rounded-sm size-4 border-2 bg-white"
+                  style={{ borderColor: strokeColor }}
+                />
+              </Button>
+            </Hint>
+            <Hint label="border width" side="bottom">
+              <Button
+                onClick={() => onChangeActiveTool('stroke-width')}
+                size="icon"
+                variant="ghost"
+                className={cn(activeTool === 'stroke-width' && 'bg-gray-100')}
+              >
+                <BsBorderWidth className="size-4" />
+              </Button>
+            </Hint>
+          </>
+        )}
         <Hint label="forward" side="bottom">
           <Button
             onClick={() => editor?.bringForward()}
