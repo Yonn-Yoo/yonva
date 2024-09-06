@@ -40,7 +40,7 @@ export default function StrokeWidthSidebar({
       />
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">
-          <Label className="text-sm">stroke width</Label>
+          <Label className="text-sm">stroke width: {`${widthValue}px`}</Label>
           <Slider
             value={[widthValue]}
             onValueChange={(value) => onChangeStrokeWidth(value[0])}

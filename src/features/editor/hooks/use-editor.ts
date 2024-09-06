@@ -107,30 +107,18 @@ const buildEditor = ({
     addCircle: () => {
       const object = new fabric.Circle({
         ...CIRCLE_OPTIONS,
-        fill: fillColor,
-        stroke: strokeColor,
-        strokeWidth,
-        strokeDashArray,
       });
       addToCanvas(object);
     },
     addRectangle: () => {
       const object = new fabric.Rect({
         ...RECT_OPTIONS,
-        fill: fillColor,
-        stroke: strokeColor,
-        strokeWidth,
-        strokeDashArray,
       });
       addToCanvas(object);
     },
     addSoftRectangle: () => {
       const object = new fabric.Rect({
         ...RECT_OPTIONS,
-        fill: fillColor,
-        stroke: strokeColor,
-        strokeWidth,
-        strokeDashArray,
         rx: 6,
         ry: 6,
       });
@@ -139,21 +127,14 @@ const buildEditor = ({
     addTriangle: () => {
       const object = new fabric.Triangle({
         ...TRIANGLE_OPTIONS,
-        fill: fillColor,
-        stroke: strokeColor,
-        strokeWidth,
-        strokeDashArray,
       });
       addToCanvas(object);
     },
     addInverseTriangle: () => {
       const object = new fabric.Triangle({
         ...TRIANGLE_OPTIONS,
-        fill: fillColor,
-        stroke: strokeColor,
-        strokeWidth,
+
         flipY: true,
-        strokeDashArray,
       });
       addToCanvas(object);
     },
@@ -168,10 +149,6 @@ const buildEditor = ({
         {
           ...RECT_OPTIONS,
           strokeLineJoin: 'round',
-          fill: fillColor,
-          stroke: strokeColor,
-          strokeWidth,
-          strokeDashArray,
         }
       );
       addToCanvas(object);
@@ -317,7 +294,7 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
 
       const testText = new fabric.Text('Hello world!', {
         fontWeight: 600,
-        fontSize: 32,
+        fontSize: 42,
       });
 
       initialCanvas.add(testText);

@@ -1,17 +1,15 @@
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 import { IconType } from 'react-icons';
-import { Editor } from '../types';
+import { FILL_COLOR } from '../types';
 
 type Props = {
-  editor: Editor | undefined;
   onClick: () => void;
   icon: LucideIcon | IconType;
   iconClassName?: string;
 };
 
 export default function ShapeTool({
-  editor,
   onClick,
   icon: Icon,
   iconClassName,
@@ -19,7 +17,7 @@ export default function ShapeTool({
   return (
     <button onClick={onClick} className="aspect-square border rounded-md p-5">
       <Icon
-        style={{ color: editor?.getActiveFillColor() }}
+        style={{ color: FILL_COLOR }}
         className={cn('w-full h-full', iconClassName)}
       />
     </button>
