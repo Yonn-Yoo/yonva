@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
 import { ToolType, selectionDependentTools } from '../types';
 import FillColorSidebar from './fill-color-sidebar';
+import FontSidebar from './font-sidebar';
 import Footer from './footer';
 import Navbar from './navbar';
 import OpacitySidebar from './opacity-sidebar';
@@ -99,6 +100,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <TextSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <FontSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}

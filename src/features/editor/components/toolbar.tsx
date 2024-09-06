@@ -3,7 +3,7 @@
 import Hint from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowDown, ArrowUp } from 'lucide-react';
+import { ArrowDown, ArrowUp, ChevronDown } from 'lucide-react';
 import { BsBorderWidth } from 'react-icons/bs';
 import { RxTransparencyGrid } from 'react-icons/rx';
 import { Editor, ToolType } from '../types';
@@ -22,6 +22,7 @@ export default function Toolbar({
 }: Props) {
   const fillColor = editor?.getActiveFillColor();
   const strokeColor = editor?.getActiveStrokeColor();
+  const font = editor?.getActiveFontFamily();
   const objectType = editor?.selectedObjects[0]?.type;
   const isText = isTextType(objectType);
 
@@ -47,6 +48,21 @@ export default function Toolbar({
             />
           </Button>
         </Hint>
+        {isText && (
+          <Hint label="font" side="bottom">
+            <Button
+              onClick={() => onChangeActiveTool('font')}
+              variant="ghost"
+              className={cn(
+                'w-28 p-2 flex items-center justify-between',
+                activeTool === 'font' && 'bg-gray-100'
+              )}
+            >
+              <div className="w-28 truncate text-left text-sm">{font}</div>
+              <ChevronDown className="size-4 shrink-0" />
+            </Button>
+          </Hint>
+        )}
         {!isText && (
           <>
             <Hint label="border color" side="bottom">
