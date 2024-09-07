@@ -12,6 +12,7 @@ export interface HintProps {
   align?: 'start' | 'center' | 'end';
   sideOffset?: number;
   alignOffset?: number;
+  shortcut?: string;
 }
 
 export default function Hint({
@@ -21,19 +22,23 @@ export default function Hint({
   align,
   sideOffset = 5,
   alignOffset = 5,
+  shortcut,
 }: HintProps) {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={10}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent
-          className="text-white bg-slate-800 border-slate-800"
+          className="flex flex-col items-center space-y-1 text-white bg-slate-800 border-slate-800"
           side={side}
           align={align}
           sideOffset={sideOffset}
           alignOffset={alignOffset}
         >
-          <p className="capitalize">{label}</p>
+          <p className="capitalize text-sm">{label}</p>
+          {shortcut && (
+            <span className="text-slate-400 text-xs">{shortcut}</span>
+          )}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

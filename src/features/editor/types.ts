@@ -140,6 +140,7 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  delete: () => void;
   addText: (value: string, options?: ITextboxOptions) => void;
   changeOpacity: (value: number) => void;
   changeFontWeight: (value: number) => void;

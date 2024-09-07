@@ -11,3 +11,8 @@ export function formatRGBA(object: RGBColor | 'transparent') {
   const alpha = a === undefined ? 1 : a;
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+export function getCtrlIcon() {
+  const isMacOS = navigator.userAgent.includes('Macintosh');
+  return isMacOS ? '⌘(cmd)' : 'ctrl';
+}

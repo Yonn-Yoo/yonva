@@ -30,7 +30,7 @@ export const FontSizeInput = ({ value, onChange }: Props) => {
       </Button>
       <Input
         onChange={handleChange}
-        value={value}
+        value={value || 0}
         className="w-12 h-10 text-xs focus-visible:ring-offset-0 focus-visible:ring-0 rounded-none"
       />
       <Button

@@ -60,6 +60,11 @@ const buildEditor = ({
   };
 
   return {
+    delete: () => {
+      canvas?.getActiveObjects().forEach((obj) => canvas.remove(obj));
+      canvas?.discardActiveObject();
+      canvas?.renderAll();
+    },
     changeOpacity: (value: number) => {
       canvas?.getActiveObjects().forEach((obj) => {
         obj.set({ opacity: value });
@@ -451,14 +456,6 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
-
-      const testText = new fabric.Text('Hello world!', {
-        fontWeight: 600,
-        fontSize: 42,
-      });
-
-      initialCanvas.add(testText);
-      initialCanvas.centerObject(testText);
     },
     []
   );

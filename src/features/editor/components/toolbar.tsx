@@ -3,8 +3,8 @@
 import Hint from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowDown, ArrowUp, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowDown, ArrowUp, ChevronDown, Trash } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { BsBorderWidth } from 'react-icons/bs';
 import {
   FaAlignCenter,
@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa6';
 import { RxTransparencyGrid } from 'react-icons/rx';
 import { Editor, FONT_SIZE, FONT_WEIGHT, ToolType } from '../types';
-import { isTextType } from '../utils';
+import { getCtrlIcon, isTextType } from '../utils';
 import { FontSizeInput } from './font-size-input';
 
 type Props = {
@@ -107,6 +107,19 @@ export default function Toolbar({
       fontSize: value,
     }));
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedObject) return;
+      if ((e.metaKey || e.ctrlKey) && e.key === 'd') {
+        e.preventDefault();
+        editor?.delete();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   if (editor?.selectedObjects.length === 0) {
     return (
@@ -269,6 +282,11 @@ export default function Toolbar({
             variant="ghost"
           >
             <RxTransparencyGrid className="size-4" />
+          </Button>
+        </Hint>
+        <Hint label="delete" side="bottom" shortcut={`${getCtrlIcon()} + d`}>
+          <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
+            <Trash className="size-4" />
           </Button>
         </Hint>
       </div>
