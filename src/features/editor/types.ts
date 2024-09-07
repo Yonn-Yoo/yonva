@@ -82,6 +82,7 @@ export const STROKE_COLOR = 'rgba(0,0,0,1)';
 export const STROKE_WIDTH = 0;
 export const STROKE_DASH_ARRAY = [];
 export const FONT_FAMILY = 'arial';
+export const FONT_WEIGHT = 400;
 export const FONT_SIZE = 24;
 
 export const CIRCLE_OPTIONS = {
@@ -124,12 +125,14 @@ export type EditorHookProps = {
 export type BuildEditorType = {
   canvas: fabric.Canvas | null;
   fontFamily: string;
+  fontWeight: number;
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
   strokeDashArray: number[];
   selectedObjects: fabric.Object[];
   setFontFamily: (value: string) => void;
+  setFontWeight: (value: number) => void;
   setFillColor: (value: string) => void;
   setStrokeColor: (value: string) => void;
   setStrokeWidth: (value: number) => void;
@@ -139,6 +142,11 @@ export type BuildEditorType = {
 export type Editor = {
   addText: (value: string, options?: ITextboxOptions) => void;
   changeOpacity: (value: number) => void;
+  changeFontWeight: (value: number) => void;
+  changeFontStyle: (value: string) => void;
+  changeLinethrough: (value: boolean) => void;
+  changeUnderline: (value: boolean) => void;
+  changeTextAlign: (value: string) => void;
   bringForward: () => void;
   sendBackwards: () => void;
   changeFontFamily: (value: string) => void;
@@ -153,6 +161,11 @@ export type Editor = {
   addInverseTriangle: () => void;
   addDiamond: () => void;
   getActiveFontFamily: () => string;
+  getActiveFontWeight: () => number;
+  getActiveFontStyle: () => string;
+  getActiveLinethrough: () => boolean;
+  getActiveUnderline: () => boolean;
+  getActiveTextAlign: () => string;
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;
   getActiveStrokeWidth: () => number;
