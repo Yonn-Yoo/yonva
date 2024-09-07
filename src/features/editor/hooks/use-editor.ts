@@ -6,6 +6,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_SIZE,
   FONT_WEIGHT,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -144,6 +145,24 @@ const buildEditor = ({
 
       // @ts-ignore
       const value = selectedObject.get('textAlign') || 'left';
+
+      return value;
+    },
+    changeFontSize: (value: number) => {
+      canvas?.getActiveObjects().forEach((obj) => {
+        if (isTextType(obj.type)) {
+          // @ts-ignore
+          obj.set({ fontSize: value });
+        }
+      });
+      canvas?.renderAll();
+    },
+    getActiveFontSize: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) return FONT_SIZE;
+
+      // @ts-ignore
+      const value = selectedObject.get('fontSize') || FONT_SIZE;
 
       return value;
     },

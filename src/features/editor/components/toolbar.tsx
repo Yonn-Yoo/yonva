@@ -16,8 +16,9 @@ import {
   FaUnderline,
 } from 'react-icons/fa6';
 import { RxTransparencyGrid } from 'react-icons/rx';
-import { Editor, FONT_WEIGHT, ToolType } from '../types';
+import { Editor, FONT_SIZE, FONT_WEIGHT, ToolType } from '../types';
 import { isTextType } from '../utils';
+import { FontSizeInput } from './font-size-input';
 
 type Props = {
   editor: Editor | undefined;
@@ -40,6 +41,7 @@ export default function Toolbar({
   const initialLinethrough = editor?.getActiveLinethrough();
   const initialUnderline = editor?.getActiveUnderline();
   const initialTextAlign = editor?.getActiveTextAlign();
+  const initialFontSize = editor?.getActiveFontSize() || FONT_SIZE;
 
   const [property, setProperty] = useState({
     fillColor: initialFillColor,
@@ -50,6 +52,7 @@ export default function Toolbar({
     linethrough: initialLinethrough,
     underline: initialUnderline,
     textAlign: initialTextAlign,
+    fontSize: initialFontSize,
   });
 
   const isText = isTextType(objectType);
@@ -91,6 +94,18 @@ export default function Toolbar({
 
     editor?.changeTextAlign(textAlign);
     setProperty((prev) => ({ ...prev, textAlign }));
+  };
+
+  const onChangeFontSize = (value: number) => {
+    if (!selectedObject) {
+      return;
+    }
+
+    editor?.changeFontSize(value);
+    setProperty((current) => ({
+      ...current,
+      fontSize: value,
+    }));
   };
 
   if (editor?.selectedObjects.length === 0) {
@@ -195,6 +210,10 @@ export default function Toolbar({
                 <FaAlignRight className="size-3" />
               </Button>
             </Hint>
+            <FontSizeInput
+              value={property.fontSize}
+              onChange={onChangeFontSize}
+            />
           </>
         )}
 
