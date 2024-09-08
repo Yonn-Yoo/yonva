@@ -1,3 +1,4 @@
+import Providers from '@/components/providers';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-screen flex flex-col" lang="en">
-      <body className={`${inter.className} grow`}>{children}</body>
+      <body className={`${inter.className} grow`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

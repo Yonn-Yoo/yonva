@@ -7,6 +7,7 @@ import { ToolType, selectionDependentTools } from '../types';
 import FillColorSidebar from './fill-color-sidebar';
 import FontSidebar from './font-sidebar';
 import Footer from './footer';
+import ImageSidebar from './image-sidebar';
 import Navbar from './navbar';
 import OpacitySidebar from './opacity-sidebar';
 import ShapeSidebar from './shape-sidebar';
@@ -105,6 +106,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <FontSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <ImageSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
