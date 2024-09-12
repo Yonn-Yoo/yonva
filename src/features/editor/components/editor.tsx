@@ -4,7 +4,9 @@ import { fabric } from 'fabric';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
 import { ToolType, selectionDependentTools } from '../types';
+import AiSidebar from './\bai-sidebar';
 import FillColorSidebar from './fill-color-sidebar';
+import FilterSidebar from './filter-sidebar';
 import FontSidebar from './font-sidebar';
 import Footer from './footer';
 import ImageSidebar from './image-sidebar';
@@ -111,6 +113,16 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <ImageSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <FilterSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <AiSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}

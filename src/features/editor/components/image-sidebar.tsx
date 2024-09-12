@@ -1,10 +1,9 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useGetImages } from '@/features/images/api/use-get-images';
 import { UploadButton } from '@/lib/uploadthing';
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Loader } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Editor, ToolType } from '../types';
 import ToolSidebarClose from './tool-sidebar-close';
 import ToolSidebarHeader from './tool-sidebar-header';
@@ -20,8 +19,15 @@ export default function ImageSidebar({
   activeTool,
   onChangeActiveTool,
 }: Props) {
-  const { data, isLoading, isError } = useGetImages();
+  // const { data, isLoading, isError } = useGetImages();
   const onClose = () => onChangeActiveTool('select');
+  const [tmp, setTmp] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/images.json')
+      .then((res) => res.json())
+      .then(setTmp);
+  }, []);
 
   return (
     <aside
@@ -47,7 +53,7 @@ export default function ImageSidebar({
           onClientUploadComplete={(res) => editor?.addImage(res[0].url)}
         />
       </div>
-      {isLoading && (
+      {/* {isLoading && (
         <div className="flex justify-center items-center flex-1">
           <Loader className="size-7 text-slate-600 animate-spin" />
         </div>
@@ -59,14 +65,14 @@ export default function ImageSidebar({
             Sorry, failed to load images 🥲
           </p>
         </div>
-      )}
+      )} */}
 
       <ScrollArea>
         <ul className="p-2 grid grid-cols-2 gap-2">
-          {data &&
-            data?.map((image) => (
+          {tmp &&
+            tmp?.map((image: any) => (
               <li
-                onClick={() => editor?.addImage(image.urls.full)}
+                onClick={() => editor?.addImage(image.urls.regular)}
                 key={image.id}
                 className="relative w-full h-[100px] group hover:opacity-75 transition bg-muted rounded-sm overflow-hidden border cursor-pointer"
               >
