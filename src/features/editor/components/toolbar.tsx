@@ -3,7 +3,13 @@
 import Hint from '@/components/hint';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowDown, ArrowUp, ChevronDown, Trash } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronDown,
+  SquareSplitHorizontal,
+  Trash,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { BsBorderWidth } from 'react-icons/bs';
 import {
@@ -261,16 +267,28 @@ export default function Toolbar({
           </>
         )}
         {isImage && (
-          <Hint label="filters" side="bottom">
-            <Button
-              onClick={() => onChangeActiveTool('filter')}
-              size="icon"
-              variant="ghost"
-              className={cn(activeTool === 'filter' && 'bg-gray-100')}
-            >
-              <TbColorFilter className="size-4" />
-            </Button>
-          </Hint>
+          <>
+            <Hint label="filters" side="bottom">
+              <Button
+                onClick={() => onChangeActiveTool('filter')}
+                size="icon"
+                variant="ghost"
+                className={cn(activeTool === 'filter' && 'bg-gray-100')}
+              >
+                <TbColorFilter className="size-4" />
+              </Button>
+            </Hint>
+            <Hint label="remove background" side="bottom">
+              <Button
+                onClick={() => onChangeActiveTool('remove-bg')}
+                size="icon"
+                variant="ghost"
+                className={cn(activeTool === 'remove-bg' && 'bg-gray-100')}
+              >
+                <SquareSplitHorizontal className="size-4" />
+              </Button>
+            </Hint>
+          </>
         )}
         <Hint label="forward" side="bottom">
           <Button

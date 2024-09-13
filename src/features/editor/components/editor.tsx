@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
 import { ToolType, selectionDependentTools } from '../types';
 import AiSidebar from './\bai-sidebar';
+import RemoveBgSidebar from './\bremove-bg-sidebar';
 import FillColorSidebar from './fill-color-sidebar';
 import FilterSidebar from './filter-sidebar';
 import FontSidebar from './font-sidebar';
@@ -123,6 +124,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <AiSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <RemoveBgSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
