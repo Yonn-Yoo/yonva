@@ -168,6 +168,8 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  enableDrawingMode: () => void;
+  disableDrawingMode: () => void;
   onCopy: () => void;
   onPaste: () => void;
   changeImageFilter: (value: string) => void;

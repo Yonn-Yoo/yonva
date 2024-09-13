@@ -6,6 +6,7 @@ import useEditor from '../hooks/use-editor';
 import { ToolType, selectionDependentTools } from '../types';
 import AiSidebar from './\bai-sidebar';
 import RemoveBgSidebar from './\bremove-bg-sidebar';
+import DrawSidebar from './draw-sidebar';
 import FillColorSidebar from './fill-color-sidebar';
 import FilterSidebar from './filter-sidebar';
 import FontSidebar from './font-sidebar';
@@ -54,11 +55,11 @@ export default function Editor() {
   const onChangeActiveTool = useCallback(
     (tool: ToolType) => {
       if (tool === 'draw') {
-        // editor?.enableDrawingMode();
+        editor?.enableDrawingMode();
       }
 
       if (activeTool === 'draw') {
-        // editor?.disableDrawingMode();
+        editor?.disableDrawingMode();
       }
 
       if (tool === activeTool) {
@@ -67,7 +68,7 @@ export default function Editor() {
 
       setActiveTool(tool);
     },
-    [activeTool]
+    [activeTool, editor]
   );
 
   return (
@@ -129,6 +130,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <RemoveBgSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <DrawSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
