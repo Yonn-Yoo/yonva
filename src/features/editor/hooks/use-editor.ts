@@ -22,8 +22,11 @@ import {
 } from './../types';
 import { useAutoResize } from './use-auto-resize';
 import useCanvasEvents from './use-canvas-events';
+import useClipboard from './use-clipboard';
 
 const buildEditor = ({
+  copy,
+  paste,
   canvas,
   fontFamily,
   fontWeight,
@@ -60,6 +63,8 @@ const buildEditor = ({
   };
 
   return {
+    onCopy: () => copy(),
+    onPaste: () => paste(),
     changeImageFilter: (value: string) => {
       const objects = canvas?.getActiveObjects();
       objects?.forEach((object) => {
@@ -409,6 +414,7 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     useState<number[]>(STROKE_DASH_ARRAY);
+  const { copy, paste } = useClipboard({ canvas });
 
   useAutoResize({
     canvas,
@@ -425,6 +431,8 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
     return canvas
       ? buildEditor({
           canvas,
+          copy,
+          paste,
           fontFamily,
           fontWeight,
           fillColor,
@@ -442,6 +450,8 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
       : undefined;
   }, [
     canvas,
+    copy,
+    paste,
     fontFamily,
     fillColor,
     strokeColor,

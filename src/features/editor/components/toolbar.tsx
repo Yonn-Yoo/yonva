@@ -7,6 +7,7 @@ import {
   ArrowDown,
   ArrowUp,
   ChevronDown,
+  Copy,
   SquareSplitHorizontal,
   Trash,
 } from 'lucide-react';
@@ -21,7 +22,6 @@ import {
   FaStrikethrough,
   FaUnderline,
 } from 'react-icons/fa6';
-import { RxTransparencyGrid } from 'react-icons/rx';
 import { TbColorFilter } from 'react-icons/tb';
 import { Editor, FONT_SIZE, FONT_WEIGHT, ToolType } from '../types';
 import { getCtrlIcon, isImageType, isTextType } from '../utils';
@@ -308,13 +308,21 @@ export default function Toolbar({
             <ArrowDown className="size-4" />
           </Button>
         </Hint>
-        <Hint label="opacity" side="bottom">
+        <Hint label="duplicate" side="bottom">
           <Button
-            onClick={() => onChangeActiveTool('opacity')}
+            onClick={() => {
+              editor?.onCopy();
+              editor?.onPaste();
+            }}
             size="icon"
             variant="ghost"
           >
-            <RxTransparencyGrid className="size-4" />
+            <Copy className="size-4" />
+          </Button>
+        </Hint>
+        <Hint label="delete" side="bottom" shortcut={`${getCtrlIcon()} + d`}>
+          <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
+            <Trash className="size-4" />
           </Button>
         </Hint>
         <Hint label="delete" side="bottom" shortcut={`${getCtrlIcon()} + d`}>
