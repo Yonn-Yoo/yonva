@@ -325,11 +325,6 @@ export default function Toolbar({
             <Trash className="size-4" />
           </Button>
         </Hint>
-        <Hint label="delete" side="bottom" shortcut={`${getCtrlIcon()} + d`}>
-          <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
-            <Trash className="size-4" />
-          </Button>
-        </Hint>
       </div>
     </div>
   );

@@ -19,15 +19,20 @@ import {
 } from 'lucide-react';
 import { BsCloudCheck } from 'react-icons/bs';
 import { CiFileOn } from 'react-icons/ci';
-import { ToolType } from '../types';
+import { Editor, ToolType } from '../types';
 import Logo from './logo';
 
 type Props = {
+  editor: Editor | undefined;
   activeTool: ToolType;
   onChangeActiveTool: (tool: ToolType) => void;
 };
 
-export default function Navbar({ activeTool, onChangeActiveTool }: Props) {
+export default function Navbar({
+  editor,
+  activeTool,
+  onChangeActiveTool,
+}: Props) {
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
       <Logo />
@@ -67,20 +72,20 @@ export default function Navbar({ activeTool, onChangeActiveTool }: Props) {
         </Hint>
         <Hint label="undo" side="bottom">
           <Button
+            disabled={!editor?.canUndo()}
             variant="ghost"
             size="icon"
-            onClick={() => {}}
-            className="" //TODO: add dynamic class
+            onClick={() => editor?.undo()}
           >
             <Undo2 className="size-5" />
           </Button>
         </Hint>
         <Hint label="redo" side="bottom">
           <Button
+            disabled={!editor?.canRedo()}
             variant="ghost"
             size="icon"
-            onClick={() => {}}
-            className="" //TODO: add dynamic class
+            onClick={() => editor?.redo()}
           >
             <Redo2 className="size-5" />
           </Button>

@@ -8,6 +8,7 @@ import {
   FONT_FAMILY,
   FONT_SIZE,
   FONT_WEIGHT,
+  JSON_KEYS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
   STROKE_WIDTH,
@@ -23,8 +24,16 @@ import {
 import { useAutoResize } from './use-auto-resize';
 import useCanvasEvents from './use-canvas-events';
 import useClipboard from './use-clipboard';
+import useHistory from './use-history';
 
 const buildEditor = ({
+  save,
+  canRedo,
+  canUndo,
+  undo,
+  redo,
+  setHistoryIndex,
+  canvasHistory,
   autoZoom,
   copy,
   paste,
@@ -66,6 +75,10 @@ const buildEditor = ({
   return {
     autoZoom,
     getWorkSpace,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
     zoomIn: () => {
       if (!canvas) return;
       let zoomRatio = canvas.getZoom();
@@ -91,12 +104,14 @@ const buildEditor = ({
 
       workspace?.set(value);
       autoZoom();
+      save();
     },
     changeBackground: (value: string) => {
       const workspace = getWorkSpace();
 
       workspace?.set({ fill: value });
       canvas?.renderAll();
+      save();
     },
     enableDrawingMode: () => {
       if (!canvas) return;
@@ -469,9 +484,12 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
     canvas,
     container,
   });
+  const { save, canRedo, canUndo, undo, redo, setHistoryIndex, canvasHistory } =
+    useHistory({ canvas });
 
   useCanvasEvents({
     canvas,
+    save,
     setSelectedObjects,
     clearSelectionCallback,
   });
@@ -479,6 +497,13 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   const editor = useMemo(() => {
     return canvas
       ? buildEditor({
+          save,
+          canRedo,
+          canUndo,
+          undo,
+          redo,
+          setHistoryIndex,
+          canvasHistory,
           autoZoom,
           canvas,
           copy,
@@ -499,6 +524,13 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
         })
       : undefined;
   }, [
+    canRedo,
+    canUndo,
+    undo,
+    redo,
+    save,
+    setHistoryIndex,
+    canvasHistory,
     autoZoom,
     canvas,
     copy,
@@ -547,6 +579,10 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
+
+      const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
+      canvasHistory.current = [currentState];
+      setHistoryIndex(0);
     },
     []
   );

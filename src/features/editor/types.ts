@@ -1,6 +1,18 @@
 import { fabric } from 'fabric';
 import { ITextboxOptions } from 'fabric/fabric-impl';
 import * as material from 'material-colors';
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+
+export const JSON_KEYS = [
+  'extension',
+  'linkData',
+  'gradientAngle',
+  'hasControls',
+  'selectable',
+  'extensionType',
+  'editable',
+  'name',
+];
 
 export const filters = [
   'none',
@@ -157,6 +169,13 @@ export type BuildEditorType = {
   strokeWidth: number;
   strokeDashArray: number[];
   selectedObjects: fabric.Object[];
+  save: (skip?: boolean) => void;
+  canRedo: () => boolean;
+  canUndo: () => boolean;
+  undo: () => void;
+  redo: () => void;
+  setHistoryIndex: Dispatch<SetStateAction<number>>;
+  canvasHistory: MutableRefObject<string[]>;
   autoZoom: () => void;
   copy: () => void;
   paste: () => void;
@@ -177,6 +196,10 @@ export type Editor = {
   changeBackground: (value: string) => void;
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
+  canRedo: () => boolean;
+  canUndo: () => boolean;
+  undo: () => void;
+  redo: () => void;
   onCopy: () => void;
   onPaste: () => void;
   changeImageFilter: (value: string) => void;
