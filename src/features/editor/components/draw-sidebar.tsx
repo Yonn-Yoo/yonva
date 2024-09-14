@@ -19,7 +19,7 @@ export default function DrawSidebar({
   onChangeActiveTool,
 }: Props) {
   const colorValue = editor?.getActiveStrokeColor() || STROKE_COLOR;
-  const widthValue = editor?.getActiveStrokeWidth() || 2;
+  const widthValue = editor?.getActiveStrokeWidth() || 4;
 
   const onClose = () => {
     editor?.disableDrawingMode();

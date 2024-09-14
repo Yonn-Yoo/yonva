@@ -157,6 +157,7 @@ export type BuildEditorType = {
   strokeWidth: number;
   strokeDashArray: number[];
   selectedObjects: fabric.Object[];
+  autoZoom: () => void;
   copy: () => void;
   paste: () => void;
   setFontFamily: (value: string) => void;
@@ -168,6 +169,9 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  getWorkSpace: () => fabric.Object | undefined;
+  changeSize: (value: { width: number; height: number }) => void;
+  changeBackground: (value: string) => void;
   enableDrawingMode: () => void;
   disableDrawingMode: () => void;
   onCopy: () => void;

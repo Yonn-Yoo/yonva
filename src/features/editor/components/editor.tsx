@@ -14,6 +14,7 @@ import Footer from './footer';
 import ImageSidebar from './image-sidebar';
 import Navbar from './navbar';
 import OpacitySidebar from './opacity-sidebar';
+import SettingsSidebar from './settings-sidebar';
 import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
 import StrokeColorSidebar from './stroke-color-sidebar';
@@ -135,6 +136,11 @@ export default function Editor() {
           activeTool={activeTool}
         />
         <DrawSidebar
+          editor={editor}
+          onChangeActiveTool={onChangeActiveTool}
+          activeTool={activeTool}
+        />
+        <SettingsSidebar
           editor={editor}
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}

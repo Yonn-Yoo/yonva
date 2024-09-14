@@ -25,6 +25,7 @@ import useCanvasEvents from './use-canvas-events';
 import useClipboard from './use-clipboard';
 
 const buildEditor = ({
+  autoZoom,
   copy,
   paste,
   canvas,
@@ -63,12 +64,25 @@ const buildEditor = ({
   };
 
   return {
+    getWorkSpace,
+    changeSize: (value: { width: number; height: number }) => {
+      const workspace = getWorkSpace();
+
+      workspace?.set(value);
+      autoZoom();
+    },
+    changeBackground: (value: string) => {
+      const workspace = getWorkSpace();
+
+      workspace?.set({ fill: value });
+      canvas?.renderAll();
+    },
     enableDrawingMode: () => {
       if (!canvas) return;
       canvas.discardActiveObject();
       canvas.renderAll();
       canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush.width = 2;
+      canvas.freeDrawingBrush.width = 4;
       canvas.freeDrawingBrush.color = strokeColor;
     },
     disableDrawingMode: () => {
@@ -430,7 +444,7 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
     useState<number[]>(STROKE_DASH_ARRAY);
   const { copy, paste } = useClipboard({ canvas });
 
-  useAutoResize({
+  const { autoZoom } = useAutoResize({
     canvas,
     container,
   });
@@ -444,6 +458,7 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   const editor = useMemo(() => {
     return canvas
       ? buildEditor({
+          autoZoom,
           canvas,
           copy,
           paste,
@@ -463,6 +478,7 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
         })
       : undefined;
   }, [
+    autoZoom,
     canvas,
     copy,
     paste,
