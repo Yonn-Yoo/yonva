@@ -169,6 +169,9 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  autoZoom: () => void;
+  zoomIn: () => void;
+  zoomOut: () => void;
   getWorkSpace: () => fabric.Object | undefined;
   changeSize: (value: { width: number; height: number }) => void;
   changeBackground: (value: string) => void;
