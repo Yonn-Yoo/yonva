@@ -11,7 +11,7 @@ import {
   SquareSplitHorizontal,
   Trash,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BsBorderWidth } from 'react-icons/bs';
 import {
   FaAlignCenter,
@@ -115,19 +115,6 @@ export default function Toolbar({
       fontSize: value,
     }));
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!selectedObject) return;
-      if ((e.metaKey || e.ctrlKey) && e.key === 'd') {
-        e.preventDefault();
-        editor?.delete();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
 
   if (editor?.selectedObjects.length === 0) {
     return (

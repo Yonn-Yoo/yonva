@@ -20,6 +20,7 @@ import {
 import { BsCloudCheck } from 'react-icons/bs';
 import { CiFileOn } from 'react-icons/ci';
 import { Editor, ToolType } from '../types';
+import { getCtrlIcon } from '../utils';
 import Logo from './logo';
 
 type Props = {
@@ -70,7 +71,7 @@ export default function Navbar({
             <MousePointerClick className="size-5" />
           </Button>
         </Hint>
-        <Hint label="undo" side="bottom">
+        <Hint label="undo" side="bottom" shortcut={`${getCtrlIcon()} + z`}>
           <Button
             disabled={!editor?.canUndo()}
             variant="ghost"
@@ -80,7 +81,11 @@ export default function Navbar({
             <Undo2 className="size-5" />
           </Button>
         </Hint>
-        <Hint label="redo" side="bottom">
+        <Hint
+          label="redo"
+          side="bottom"
+          shortcut={`${getCtrlIcon()} + shift + z`}
+        >
           <Button
             disabled={!editor?.canRedo()}
             variant="ghost"
