@@ -1,10 +1,7 @@
-import { Button } from '@/components/ui/button';
+import { protectServer } from '@/features/auth/utils';
 
-export default function Home() {
-  return (
-    <div>
-      <Button size="sm">Click me</Button>
-      Hello World!
-    </div>
-  );
+export default async function Home() {
+  await protectServer();
+
+  return <div>you are logged in</div>;
 }
