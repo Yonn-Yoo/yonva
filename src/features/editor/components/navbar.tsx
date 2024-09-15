@@ -17,8 +17,13 @@ import {
   Redo2,
   Undo2,
 } from 'lucide-react';
-import { BsCloudCheck } from 'react-icons/bs';
-import { CiFileOn } from 'react-icons/ci';
+import {
+  BsCloudCheck,
+  BsFiletypeJpg,
+  BsFiletypeJson,
+  BsFiletypePng,
+  BsFiletypeSvg,
+} from 'react-icons/bs';
 import { useFilePicker } from 'use-file-picker';
 import { Editor, ToolType } from '../types';
 import { getCtrlIcon } from '../utils';
@@ -63,7 +68,7 @@ export default function Navbar({
               onClick={openFilePicker}
               className="flex items-center gap-x-2 cursor-pointer"
             >
-              <CiFileOn className="size-8" />
+              <BsFiletypeJson className="size-7" />
               <div>
                 <p>Open</p>
                 <p className="text-xs text-muted-foreground">
@@ -126,7 +131,7 @@ export default function Navbar({
                 onClick={() => editor?.saveJson()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
-                <CiFileOn className="size-8" />
+                <BsFiletypeJson className="size-7" />
                 <div>
                   <p>JSON</p>
                   <p className="text-xs text-muted-foreground">
@@ -138,7 +143,7 @@ export default function Navbar({
                 onClick={() => editor?.savePNG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
-                <CiFileOn className="size-8" />
+                <BsFiletypePng className="size-7" />
                 <div>
                   <p>PNG</p>
                   <p className="text-xs text-muted-foreground">
@@ -150,7 +155,7 @@ export default function Navbar({
                 onClick={() => editor?.saveJPG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
-                <CiFileOn className="size-8" />
+                <BsFiletypeJpg className="size-7" />
                 <div>
                   <p>JPG</p>
                   <p className="text-xs text-muted-foreground">
@@ -162,7 +167,7 @@ export default function Navbar({
                 onClick={() => editor?.saveSVG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
-                <CiFileOn className="size-8" />
+                <BsFiletypeSvg className="size-7" />
                 <div>
                   <p>SVG</p>
                   <p className="text-xs text-muted-foreground">
