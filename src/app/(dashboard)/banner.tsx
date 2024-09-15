@@ -1,26 +1,28 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useCreateProject } from '@/features/projects/api/use-create-project';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Banner() {
-  // const router = useRouter();
-  // const mutation = useCreateProject();
+  const router = useRouter();
+  const mutation = useCreateProject();
 
   const onClick = () => {
-    // mutation.mutate(
-    //   {
-    //     name: 'Untitled project',
-    //     json: '',
-    //     width: 900,
-    //     height: 1200,
-    //   },
-    //   {
-    //     onSuccess: ({ data }) => {
-    //       router.push(`/editor/${data.id}`);
-    //     },
-    //   }
-    // );
+    mutation.mutate(
+      {
+        name: 'Untitled project',
+        json: '',
+        width: 900,
+        height: 1200,
+      },
+      {
+        onSuccess: ({ data }) => {
+          router.push(`/editor/${data.id}`);
+        },
+      }
+    );
   };
   return (
     <div className="text-white aspect-[5/1] min-h-[200px] flex gap-x-6 px-6 py-4 items-center rounded-xl bg-gradient-to-r from-[#2e62cb] via-[#0073ff] to-[#3faff5]">
@@ -38,7 +40,7 @@ export default function Banner() {
           let AI do the rest.
         </p>
         <Button
-          // disabled={mutation.isPending}
+          disabled={mutation.isPending}
           onClick={onClick}
           variant="secondary"
           className="w-36 group"

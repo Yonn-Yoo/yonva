@@ -4,6 +4,7 @@ import { Context, Hono } from 'hono';
 import { handle } from 'hono/vercel';
 import ai from './ai';
 import images from './images';
+import projects from './projects';
 import users from './users';
 
 export const runtime = 'nodejs';
@@ -22,9 +23,9 @@ app.use('*', initAuthConfig(getAuthConfig));
 const routes = app
   .route('/ai', ai)
   .route('/images', images)
-  .route('/users', users);
+  .route('/users', users)
+  .route('/projects', projects);
 
-// .route('/projects', projects)
 // .route('/subscriptions', subscriptions);
 
 export const GET = handle(app);
