@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { BsCloudCheck } from 'react-icons/bs';
 import { CiFileOn } from 'react-icons/ci';
+import { useFilePicker } from 'use-file-picker';
 import { Editor, ToolType } from '../types';
 import { getCtrlIcon } from '../utils';
 import Logo from './logo';
@@ -34,6 +35,18 @@ export default function Navbar({
   activeTool,
   onChangeActiveTool,
 }: Props) {
+  const { openFilePicker } = useFilePicker({
+    accept: '.json',
+    onFilesSuccessfullySelected: ({ plainFiles }: any) => {
+      if (plainFiles && plainFiles.length > 0) {
+        const file = plainFiles[0];
+        const reader = new FileReader();
+        reader.readAsText(file, 'UTF-8');
+        reader.onload = () => editor?.loadJson(reader.result as string);
+      }
+    },
+  });
+
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
       <Logo />
@@ -47,7 +60,7 @@ export default function Navbar({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-60">
             <DropdownMenuItem
-              onClick={() => {}} //TODO: add function for opening file
+              onClick={openFilePicker}
               className="flex items-center gap-x-2 cursor-pointer"
             >
               <CiFileOn className="size-8" />
@@ -110,7 +123,7 @@ export default function Navbar({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
-                onClick={() => {}}
+                onClick={() => editor?.saveJson()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
                 <CiFileOn className="size-8" />
@@ -122,7 +135,7 @@ export default function Navbar({
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => {}}
+                onClick={() => editor?.savePNG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
                 <CiFileOn className="size-8" />
@@ -134,7 +147,7 @@ export default function Navbar({
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => {}}
+                onClick={() => editor?.saveJPG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
                 <CiFileOn className="size-8" />
@@ -146,7 +159,7 @@ export default function Navbar({
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => {}}
+                onClick={() => editor?.saveSVG()}
                 className="flex items-center gap-x-2 cursor-pointer"
               >
                 <CiFileOn className="size-8" />

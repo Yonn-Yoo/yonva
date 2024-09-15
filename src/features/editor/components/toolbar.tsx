@@ -22,6 +22,7 @@ import {
   FaStrikethrough,
   FaUnderline,
 } from 'react-icons/fa6';
+import { RxTransparencyGrid } from 'react-icons/rx';
 import { TbColorFilter } from 'react-icons/tb';
 import { Editor, FONT_SIZE, FONT_WEIGHT, ToolType } from '../types';
 import { getCtrlIcon, isImageType, isTextType } from '../utils';
@@ -305,6 +306,16 @@ export default function Toolbar({
             variant="ghost"
           >
             <Copy className="size-4" />
+          </Button>
+        </Hint>
+        <Hint label="opacity" side="bottom" sideOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool('opacity')}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === 'opacity' && 'bg-gray-100')}
+          >
+            <RxTransparencyGrid className="size-4" />
           </Button>
         </Hint>
         <Hint label="delete" side="bottom" shortcut={`${getCtrlIcon()} + d`}>

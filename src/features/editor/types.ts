@@ -188,6 +188,11 @@ export type BuildEditorType = {
 };
 
 export type Editor = {
+  savePNG: () => void;
+  saveJPG: () => void;
+  saveSVG: () => void;
+  saveJson: () => void;
+  loadJson: (json: string) => void;
   autoZoom: () => void;
   zoomIn: () => void;
   zoomOut: () => void;
