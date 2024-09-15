@@ -77,17 +77,11 @@ export default {
   },
   callbacks: {
     session({ session, token }) {
-      if (token.id) {
-        session.user.id = token.id;
-      }
-
+      if (token.id) session.user.id = token.id;
       return session;
     },
     jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-
+      if (user) token.id = user.id;
       return token;
     },
   },

@@ -25,7 +25,10 @@ const app = new Hono().post(
     const query = await db.select().from(users).where(eq(users.email, email));
 
     if (query[0]) {
-      return c.json({ error: 'Email already in use' }, 400);
+      return c.json(
+        { error: 'Email already in use', message: 'Email already in use' },
+        400
+      );
     }
 
     await db.insert(users).values({

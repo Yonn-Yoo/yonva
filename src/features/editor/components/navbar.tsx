@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
+import AvatarButton from '@/features/auth/components/\bavatar';
 import { cn } from '@/lib/utils';
 import {
   ChevronDown,
@@ -177,6 +178,7 @@ export default function Navbar({
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <AvatarButton />
         </div>
       </div>
     </nav>

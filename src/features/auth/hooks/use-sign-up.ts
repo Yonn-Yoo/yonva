@@ -11,12 +11,16 @@ export const useSignUp = () => {
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
       const response = await client.api.users.$post({ json });
-
-      if (!response.ok) {
-        throw new Error('Something went wrong');
+      if (response.status === 400) {
+        throw new Error('Email already in use');
+      } else if (!response.ok) {
+        throw new Error('Sorry, Something went wrong🥲');
       }
 
       return await response.json();
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Sign up failed');
     },
     onSuccess: () => {
       toast.success('User created');
