@@ -1,5 +1,6 @@
 'use client';
 
+import { ResponseType } from '@/features/projects/api/use-get-project';
 import { fabric } from 'fabric';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
@@ -22,7 +23,11 @@ import StrokeWidthSidebar from './stroke-width-sidebar';
 import TextSidebar from './text-sidebar';
 import Toolbar from './toolbar';
 
-export default function Editor() {
+type Props = {
+  initialData: ResponseType;
+};
+
+export default function Editor({ initialData }: Props) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [activeTool, setActiveTool] = useState<ToolType>('select');
