@@ -27,11 +27,6 @@ export default function AiSidebar({
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (shouldBlock) {
-    //   triggerPaywall();
-    //   return;
-    // }
-
     mutation.mutate(
       { prompt },
       {

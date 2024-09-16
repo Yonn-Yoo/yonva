@@ -6,7 +6,6 @@ import { handle } from 'hono/vercel';
 import ai from './ai';
 import images from './images';
 import projects from './projects';
-import subscriptions from './subscriptions';
 import users from './users';
 
 export const runtime = 'nodejs';
@@ -26,8 +25,7 @@ const routes = app
   .route('/ai', ai)
   .route('/images', images)
   .route('/users', users)
-  .route('/projects', projects)
-  .route('/subscriptions', subscriptions);
+  .route('/projects', projects);
 
 export const GET = handle(app);
 export const POST = handle(app);

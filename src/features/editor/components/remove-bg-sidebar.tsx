@@ -19,7 +19,6 @@ export default function RemoveBgSidebar({
   activeTool,
   onChangeActiveTool,
 }: Props) {
-  // const { shouldBlock, triggerPaywall } = usePaywall();
   const mutation = useRemoveBg();
   const selectedObject = editor?.selectedObjects[0];
   // @ts-ignore
@@ -27,10 +26,6 @@ export default function RemoveBgSidebar({
 
   const onClose = () => onChangeActiveTool('select');
   const onClick = () => {
-    // if (shouldBlock) {
-    //   triggerPaywall();
-    //   return;
-    // }
     mutation.mutate(
       {
         image: imageSrc,

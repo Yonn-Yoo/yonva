@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS "project" (
 	"width" integer NOT NULL,
 	"thumbnailUrl" text,
 	"isTemplate" boolean,
-	"isPro" boolean,
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp NOT NULL
 );

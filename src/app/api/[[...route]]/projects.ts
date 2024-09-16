@@ -2,7 +2,7 @@ import { db } from '@/db/drizzle';
 import { projects, projectsInsertSchema } from '@/db/schema';
 import { verifyAuth } from '@hono/auth-js';
 import { zValidator } from '@hono/zod-validator';
-import { and, asc, desc, eq } from 'drizzle-orm';
+import { and, desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 
@@ -25,8 +25,7 @@ const app = new Hono()
         .from(projects)
         .where(eq(projects.isTemplate, true))
         .limit(limit)
-        .offset((page - 1) * limit)
-        .orderBy(asc(projects.isPro), desc(projects.updatedAt));
+        .offset((page - 1) * limit);
 
       return c.json({ data });
     }
