@@ -13,7 +13,7 @@ export default function Logo() {
       <h1
         className={cn(
           font.className,
-          'text-3xl font-bold bg-gradient-to-r from-[#007AFE] to-[#302ECB] text-transparent bg-clip-text hover:opacity-75 transition'
+          'text-3xl font-bold bg-gradient-to-r from-[#2891ff] to-[#302ECB] text-transparent bg-clip-text hover:opacity-75 transition'
         )}
       >
         Yonva

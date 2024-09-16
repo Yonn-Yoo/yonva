@@ -14,7 +14,7 @@ export const Logo = () => {
         <h1
           className={cn(
             font.className,
-            'text-3xl 2xl:text-4xl font-bold bg-gradient-to-r from-[#007AFE] to-[#302ECB] text-transparent bg-clip-text'
+            'text-3xl 2xl:text-4xl font-bold bg-gradient-to-r from-[#2891ff] to-[#302ECB] text-transparent bg-clip-text'
           )}
         >
           Yonva

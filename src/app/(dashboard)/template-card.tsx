@@ -44,8 +44,11 @@ export const TemplateCard = ({
           <p className="text-white font-medium">Open in editor</p>
         </div>
       </div>
-      <div className="space-y-1 text-[#262E3C]">
-        <p className="text-sm font-medium">{title}</p>
+      <div className="space-y-1 text-[#262E3C] pl-1">
+        <div className="relative">
+          <p className="text-sm font-medium">{title}</p>
+          <div className="absolute h-px bg-[#262E3C] w-0 group-hover:w-full duration-300" />
+        </div>
         <p className="text-xs text-muted-foreground opacity-0 group-hover:opacity-75 transition">
           {description}
         </p>
