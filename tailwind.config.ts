@@ -73,31 +73,31 @@ const config = {
             transform: 'translateX(0)',
           },
           '5%': {
-            transform: 'translateY(-6px) scale(120%)',
+            transform: 'translateY(-4px) scale(120%)',
           },
           '10%': {
-            transform: 'translateY(-6px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
           },
           '15%': {
-            transform: 'translateY(-6px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
           },
           '20%': {
-            transform: 'translateY(-6px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
           },
           '25%': {
-            transform: 'translateY(-6px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
           },
           '30%': {
-            transform: 'translateY(-6px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
           },
           '35%': {
-            transform: 'translateY(-6px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
           },
           '40%': {
-            transform: 'translateY(-6px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
           },
           '45%': {
-            transform: 'translateY(-6px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
           },
           '50%': {
             transform: 'translateY(0) rotate(0)',
@@ -110,7 +110,7 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        shake: 'shake 4s infinite cubic-bezier(.36,.07,.19,.97) both',
+        shake: 'shake 3s infinite cubic-bezier(.36,.07,.19,.97) both',
       },
     },
   },
