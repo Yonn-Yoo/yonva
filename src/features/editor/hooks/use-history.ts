@@ -4,9 +4,14 @@ import { JSON_KEYS } from '../types';
 
 type Props = {
   canvas: fabric.Canvas | null;
+  saveCallback?: (values: {
+    json: string;
+    height: number;
+    width: number;
+  }) => void;
 };
 
-export default function useHistory({ canvas }: Props) {
+export default function useHistory({ canvas, saveCallback }: Props) {
   const [historyIndex, setHistoryIndex] = useState(0);
   const canvasHistory = useRef<string[]>([]);
   const skipSave = useRef(false);
@@ -22,6 +27,7 @@ export default function useHistory({ canvas }: Props) {
   const save = useCallback(
     (skip = false) => {
       if (!canvas) return;
+
       const currentState = canvas.toJSON(JSON_KEYS);
       const json = JSON.stringify(currentState);
 
@@ -30,9 +36,15 @@ export default function useHistory({ canvas }: Props) {
         setHistoryIndex(canvasHistory.current.length - 1);
       }
 
-      // TODO: save callback
+      const workspace = canvas
+        .getObjects()
+        .find((object) => object.name === 'clip');
+      const height = workspace?.height || 0;
+      const width = workspace?.width || 0;
+
+      saveCallback?.({ json, height, width });
     },
-    [canvas]
+    [canvas, saveCallback]
   );
 
   const undo = useCallback(() => {

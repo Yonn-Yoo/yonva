@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import {
   BuildEditorType,
   Editor,
@@ -30,6 +30,7 @@ import { useAutoResize } from './use-auto-resize';
 import useCanvasEvents from './use-canvas-events';
 import useClipboard from './use-clipboard';
 import useHistory from './use-history';
+import { useLoadState } from './use-load-state';
 import { useShortcuts } from './use-shortcuts';
 import { useWindowEvents } from './use-window-events';
 
@@ -536,7 +537,17 @@ const buildEditor = ({
   };
 };
 
-export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
+export default function useEditor({
+  defaultState,
+  defaultHeight,
+  defaultWidth,
+  clearSelectionCallback,
+  saveCallback,
+}: EditorHookProps) {
+  const initialState = useRef(defaultState);
+  const initialWidth = useRef(defaultWidth);
+  const initialHeight = useRef(defaultHeight);
+
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
@@ -555,8 +566,9 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
     canvas,
     container,
   });
+
   const { save, canRedo, canUndo, undo, redo, setHistoryIndex, canvasHistory } =
-    useHistory({ canvas });
+    useHistory({ canvas, saveCallback });
 
   useCanvasEvents({
     canvas,
@@ -566,6 +578,14 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
   });
 
   useShortcuts({ undo, redo, copy, paste, save, canvas });
+
+  useLoadState({
+    canvas,
+    autoZoom,
+    initialState,
+    canvasHistory,
+    setHistoryIndex,
+  });
 
   const editor = useMemo(() => {
     return canvas
@@ -631,8 +651,8 @@ export default function useEditor({ clearSelectionCallback }: EditorHookProps) {
       });
 
       const initialWorkspace = new fabric.Rect({
-        width: 500,
-        height: 800,
+        width: initialWidth.current,
+        height: initialHeight.current,
         name: 'clip',
         fill: 'white',
         selectable: false,

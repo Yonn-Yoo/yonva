@@ -1,7 +1,9 @@
 'use client';
 
 import { ResponseType } from '@/features/projects/api/use-get-project';
+import { useUpdateProject } from '@/features/projects/api/use-update-project';
 import { fabric } from 'fabric';
+import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useEditor from '../hooks/use-editor';
 import { ToolType, selectionDependentTools } from '../types';
@@ -24,10 +26,19 @@ import TextSidebar from './text-sidebar';
 import Toolbar from './toolbar';
 
 type Props = {
-  initialData: ResponseType;
+  initialData: ResponseType['data'];
 };
 
 export default function Editor({ initialData }: Props) {
+  const { mutate } = useUpdateProject(initialData.id);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSave = useCallback(
+    debounce((values: { json: string; height: number; width: number }) => {
+      mutate(values);
+    }, 3000),
+    [mutate]
+  );
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [activeTool, setActiveTool] = useState<ToolType>('select');
@@ -39,7 +50,11 @@ export default function Editor({ initialData }: Props) {
   }, [activeTool]);
 
   const { init, editor } = useEditor({
+    defaultState: initialData.json,
+    defaultWidth: initialData.width,
+    defaultHeight: initialData.height,
     clearSelectionCallback: onClearSelection,
+    saveCallback: debouncedSave,
   });
 
   useEffect(() => {
@@ -80,6 +95,7 @@ export default function Editor({ initialData }: Props) {
   return (
     <div className="h-full flex flex-col">
       <Navbar
+        id={initialData.id}
         editor={editor}
         onChangeActiveTool={onChangeActiveTool}
         activeTool={activeTool}
