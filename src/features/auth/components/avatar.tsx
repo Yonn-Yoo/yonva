@@ -5,7 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Loader, LogOut } from 'lucide-react';
@@ -36,7 +35,6 @@ export default function AvatarButton() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
-        <DropdownMenuSeparator />
         <DropdownMenuItem
           className="h-10 cursor-pointer"
           onClick={() => signOut()}
