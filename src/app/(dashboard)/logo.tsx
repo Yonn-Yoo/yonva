@@ -10,7 +10,7 @@ const font = Satisfy({
 export const Logo = () => {
   return (
     <Link href="/">
-      <div className="flex items-center gap-x-1.5 hover:opacity-75 transition h-[68px] px-4 overflow-visible">
+      <div className="flex items-center hover:opacity-75 transition h-[68px] overflow-visible">
         <h1
           className={cn(
             font.className,

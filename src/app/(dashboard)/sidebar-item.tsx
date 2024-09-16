@@ -21,12 +21,14 @@ export default function SidebarItem({
     <Link href={href} onClick={onClick}>
       <div
         className={cn(
-          'flex items-center px-3 py-3 rounded-xl bg-transparent hover:bg-white transition',
+          'flex items-center px-3 py-3 rounded-xl bg-transparent hover:bg-white transition group',
           isActive && 'bg-white'
         )}
       >
-        <Icon className="size-4 mr-2 stroke-2" />
-        <span className="text-sm font-medium">{label}</span>
+        <Icon className="size-4 mr-2 stroke-2 text-slate-500 group-hover:text-black group-hover:scale-120 group-hover:animate-shake transition" />
+        <span className="text-sm font-medium text-slate-500 group-hover:text-black transition">
+          {label}
+        </span>
       </div>
     </Link>
   );

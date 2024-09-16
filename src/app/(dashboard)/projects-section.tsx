@@ -22,6 +22,7 @@ import {
   Search,
   Trash,
 } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -33,6 +34,7 @@ export const ProjectsSection = () => {
   const duplicateMutation = useDuplicateProject();
   const removeMutation = useDeleteProject();
   const router = useRouter();
+  const session = useSession();
 
   const onCopy = (id: string) => {
     duplicateMutation.mutate({ id });
@@ -44,11 +46,12 @@ export const ProjectsSection = () => {
 
   const { data, status, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetProjects();
+  const name = session.data?.user?.name!;
 
   if (status === 'pending') {
     return (
       <div className="space-y-4">
-        <h3 className="font-semibold text-lg">Recent projects</h3>
+        <h3 className="font-semibold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <Loader className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -59,7 +62,7 @@ export const ProjectsSection = () => {
   if (status === 'error') {
     return (
       <div className="space-y-4">
-        <h3 className="font-semibold text-lg">Recent projects</h3>
+        <h3 className="font-semibold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <AlertTriangle className="size-6 text-muted-foreground" />
           <p className="text-muted-foreground text-sm">
@@ -73,7 +76,7 @@ export const ProjectsSection = () => {
   if (!data.pages.length || !data.pages[0].data.length) {
     return (
       <div className="space-y-4">
-        <h3 className="font-semibold text-lg">Recent projects</h3>
+        <h3 className="font-semibold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <Search className="size-6 text-muted-foreground" />
           <p className="text-muted-foreground text-sm">No projects found</p>
@@ -85,7 +88,7 @@ export const ProjectsSection = () => {
   return (
     <div className="space-y-4">
       <ConfirmDialog />
-      <h3 className="font-semibold text-lg">Recent projects</h3>
+      <h3 className="font-semibold text-lg">{`${name}'s recent projects`}</h3>
       <Table>
         <TableBody>
           {data.pages.map((group, i) => (

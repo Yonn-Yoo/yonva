@@ -1,8 +1,5 @@
 'use client';
 
-import { CreditCard, Loader, LogOut } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -11,21 +8,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-// import { usePaywall } from '@/features/subscriptions/hooks/use-paywall';
-// import { useBilling } from '@/features/subscriptions/api/use-billing';
+import { Loader, LogOut } from 'lucide-react';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function AvatarButton() {
-  // const { shouldBlock, triggerPaywall, isLoading } = usePaywall();
-  // const mutation = useBilling();
   const session = useSession();
-
-  const onClick = () => {
-    // if (shouldBlock) {
-    //   triggerPaywall();
-    //   return;
-    // }
-    // mutation.mutate();
-  };
 
   if (session.status === 'loading') {
     return <Loader className="size-4 animate-spin text-muted-foreground" />;
@@ -49,14 +36,6 @@ export default function AvatarButton() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
-        <DropdownMenuItem
-          // disabled={mutation.isPending}
-          onClick={onClick}
-          className="h-10 cursor-pointer"
-        >
-          <CreditCard className="size-4 mr-2" />
-          Billing
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="h-10 cursor-pointer"
