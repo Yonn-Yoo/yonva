@@ -38,7 +38,7 @@ export default function Banner() {
           disabled={mutation.isPending}
           onClick={onClick}
           variant="secondary"
-          className="relative w-52 h-12 text-base group bg-gradient-to-r from-[#17acff] to-[#3083ff] text-white overflow-hidden"
+          className="relative w-48 h-14 text-base group bg-gradient-to-r from-[#17acff] to-[#3083ff] text-white overflow-hidden"
         >
           <div className="absolute w-full h-full bg-white/0 group-hover:bg-white/20 transition" />
           Start creating
