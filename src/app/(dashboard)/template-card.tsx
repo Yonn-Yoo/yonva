@@ -49,7 +49,7 @@ export const TemplateCard = ({
           <p className="text-sm font-medium">{title}</p>
           <div className="absolute h-px bg-[#262E3C] w-0 group-hover:w-full duration-300" />
         </div>
-        <p className="text-xs text-muted-foreground opacity-0 group-hover:opacity-75 transition duratio duration-500">
+        <p className="text-xs text-muted-foreground opacity-0 translate-y-2 group-hover:translate-y-0 group-hover:opacity-75 transition duration-500">
           {description}
         </p>
       </div>
