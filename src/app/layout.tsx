@@ -11,6 +11,14 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Yonva',
   description: 'Visualize your ideas with Image AI',
+  openGraph: {
+    title: 'Yonva',
+    description: 'Visualize your ideas with Image AI',
+    siteName: 'Yonva',
+    images:
+      'https://utfs.io/f/kFQ1JGCocHa9CHu2T5L3TnQEoHwNIbeiYD97v6U3OZmg1AKj',
+    url: 'https://yonva.vercel.app',
+  },
 };
 
 export default async function RootLayout({
