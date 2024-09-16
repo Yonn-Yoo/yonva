@@ -25,7 +25,7 @@ export const TemplateCard = ({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        'space-y-2 group text-left transition flex flex-col',
+        'space-y-2 group text-left transition duration-500 flex flex-col',
         disabled ? 'cursor-not-allowed opacity-75' : 'cursor-pointer'
       )}
     >
@@ -37,10 +37,10 @@ export const TemplateCard = ({
           fill
           src={imageSrc}
           alt={title}
-          className=" object-cover transition transform group-hover:scale-105"
+          className=" object-cover transition duration-500 transform group-hover:scale-105"
         />
 
-        <div className="opacity-0 group-hover:opacity-100 transition absolute inset-0 bg-black/50 flex items-center justify-center rounded-xl backdrop-filter backdrop-blur-sm">
+        <div className="opacity-0 group-hover:opacity-100 transition duration-500 absolute inset-0 bg-black/50 flex items-center justify-center rounded-xl backdrop-filter backdrop-blur-sm">
           <p className="text-white font-medium">Open in editor</p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export const TemplateCard = ({
           <p className="text-sm font-medium">{title}</p>
           <div className="absolute h-px bg-[#262E3C] w-0 group-hover:w-full duration-300" />
         </div>
-        <p className="text-xs text-muted-foreground opacity-0 group-hover:opacity-75 transition">
+        <p className="text-xs text-muted-foreground opacity-0 group-hover:opacity-75 transition duratio duration-500">
           {description}
         </p>
       </div>
