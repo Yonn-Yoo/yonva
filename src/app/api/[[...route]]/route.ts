@@ -1,3 +1,4 @@
+// import { subscriptions } from '@/db/schema';
 import authConfig from '@/auth.config';
 import { AuthConfig, initAuthConfig } from '@hono/auth-js';
 import { Context, Hono } from 'hono';
@@ -5,6 +6,7 @@ import { handle } from 'hono/vercel';
 import ai from './ai';
 import images from './images';
 import projects from './projects';
+import subscriptions from './subscriptions';
 import users from './users';
 
 export const runtime = 'nodejs';
@@ -24,9 +26,8 @@ const routes = app
   .route('/ai', ai)
   .route('/images', images)
   .route('/users', users)
-  .route('/projects', projects);
-
-// .route('/subscriptions', subscriptions);
+  .route('/projects', projects)
+  .route('/subscriptions', subscriptions);
 
 export const GET = handle(app);
 export const POST = handle(app);
