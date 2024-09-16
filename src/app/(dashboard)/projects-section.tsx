@@ -51,7 +51,7 @@ export const ProjectsSection = () => {
   if (status === 'pending') {
     return (
       <div className="space-y-4">
-        <h3 className="text-[#262E3C] font-semibold text-lg">{`${name}'s recent projects`}</h3>
+        <h3 className="text-[#262E3C] font-extrabold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <Loader className="size-6 animate-spin text-muted-foreground" />
         </div>
@@ -62,7 +62,7 @@ export const ProjectsSection = () => {
   if (status === 'error') {
     return (
       <div className="space-y-4">
-        <h3 className="text-[#262E3C] font-semibold text-lg">{`${name}'s recent projects`}</h3>
+        <h3 className="text-[#262E3C] font-extrabold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <AlertTriangle className="size-6 text-muted-foreground" />
           <p className="text-muted-foreground text-sm">
@@ -76,7 +76,7 @@ export const ProjectsSection = () => {
   if (!data.pages.length || !data.pages[0].data.length) {
     return (
       <div className="space-y-4">
-        <h3 className="text-[#262E3C] font-semibold text-lg">{`${name}'s recent projects`}</h3>
+        <h3 className="text-[#262E3C] font-extrabold text-lg">{`${name}'s recent projects`}</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <Search className="size-6 text-muted-foreground" />
           <p className="text-muted-foreground text-sm">No projects found</p>
@@ -88,7 +88,7 @@ export const ProjectsSection = () => {
   return (
     <div className="space-y-4">
       <ConfirmDialog />
-      <h3 className="text-[#262E3C] font-semibold text-lg">{`${name}'s recent projects`}</h3>
+      <h3 className="text-[#262E3C] font-extrabold text-lg">{`${name}'s recent projects`}</h3>
       <Table className="!text-[#262E3C]">
         <TableBody>
           {data.pages.map((group, i) => (

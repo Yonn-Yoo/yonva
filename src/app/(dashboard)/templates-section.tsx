@@ -36,8 +36,10 @@ export const TemplatesSection = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
-        <h3 className="font-semibold text-lg">Start from a template</h3>
+      <div className="space-y-4 text-[#262E3C]">
+        <h3 className="font-extrabold text-lg text-[#262E3C]">
+          Start from a template
+        </h3>
         <div className="flex items-center justify-center h-32">
           <Loader className="size-6 text-muted-foreground animate-spin" />
         </div>
@@ -47,8 +49,8 @@ export const TemplatesSection = () => {
 
   if (isError) {
     return (
-      <div className="space-y-4">
-        <h3 className="font-semibold text-lg">Start from a template</h3>
+      <div className="space-y-4 text-[#262E3C]">
+        <h3 className="font-extrabold text-lg">Start from a template</h3>
         <div className="flex flex-col gap-y-4 items-center justify-center h-32">
           <TriangleAlert className="size-6 text-muted-foreground" />
           <p>Failed to load templates</p>
@@ -62,8 +64,8 @@ export const TemplatesSection = () => {
   }
 
   return (
-    <div>
-      <h3 className="font-semibold text-lg">Start from a template</h3>
+    <div className="text-[#262E3C]">
+      <h3 className="font-extrabold text-lg">Start from a template</h3>
       <div className="grid grid-cols-3 md:grid-cols-5 mt-4 gap-4">
         {data?.map((template) => (
           <TemplateCard
