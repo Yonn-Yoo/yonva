@@ -12,8 +12,6 @@ export const usePaywall = () => {
   return {
     isLoading: isLoadingSubscription,
     shouldBlock,
-    triggerPaywall: () => {
-      subscriptionModal.onOpen();
-    },
+    triggerPaywall: () => subscriptionModal.onOpen(),
   };
 };

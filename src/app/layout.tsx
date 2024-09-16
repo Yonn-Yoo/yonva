@@ -1,4 +1,5 @@
 import { auth } from '@/auth';
+import { Modals } from '@/components/modals';
 import Providers from '@/components/providers';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <body className={`${inter.className} grow`}>
           <Providers>
             <Toaster />
+            <Modals />
             {children}
           </Providers>
         </body>

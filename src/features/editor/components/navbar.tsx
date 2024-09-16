@@ -69,7 +69,7 @@ export default function Navbar({
   });
 
   return (
-    <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
+    <nav className="w-full flex items-center p-4 h-[68px] gap-x-2 border-b lg:pl-7">
       <Logo />
       <div className="w-full flex items-center gap-x-1 h-full">
         <DropdownMenu modal={false}>

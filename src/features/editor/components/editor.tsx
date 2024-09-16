@@ -22,6 +22,7 @@ import ShapeSidebar from './shape-sidebar';
 import Sidebar from './sidebar';
 import StrokeColorSidebar from './stroke-color-sidebar';
 import StrokeWidthSidebar from './stroke-width-sidebar';
+import TemplateSidebar from './template-sidebar';
 import TextSidebar from './text-sidebar';
 import Toolbar from './toolbar';
 
@@ -104,6 +105,11 @@ export default function Editor({ initialData }: Props) {
         <Sidebar
           onChangeActiveTool={onChangeActiveTool}
           activeTool={activeTool}
+        />
+        <TemplateSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
         />
         <ShapeSidebar
           editor={editor}
