@@ -92,7 +92,7 @@ export const ProjectsSection = () => {
           <div className="w-full flex flex-col space-y-3.5" key={idx}>
             {group.data.map((project) => (
               <div
-                className="w-full flex justify-between items-center bg-slate-50 py-4 px-6 rounded-lg duration-300 hover:!shadow-gray-200 hover:shadow-md cursor-pointer hover:scale-[101%] group"
+                className="w-full flex justify-between items-center bg-slate-50 py-4 px-6 rounded-lg duration-300 hover:!shadow-gray-200 hover:shadow-md hover:scale-[101%] group"
                 key={project.id}
               >
                 <div
@@ -102,19 +102,13 @@ export const ProjectsSection = () => {
                   <FileIcon className="size-6" />
                   <span className="w-fit line-clamp-1 relative">
                     {project.name}
-                    <div className="w-0 group-hover:w-full hover:w-full h-px bg-black/40 rounded-lg duration-300" />
+                    <div className="w-0 group-hover:w-full h-px bg-black/40 rounded-lg duration-500 ease-in-out" />
                   </span>
                 </div>
-                <div
-                  onClick={() => router.push(`/editor/${project.id}`)}
-                  className="hidden md:table-cell md:w-[18%] cursor-pointer"
-                >
+                <div className="hidden md:table-cell md:w-[18%]">
                   {project.width} x {project.height} px
                 </div>
-                <div
-                  onClick={() => router.push(`/editor/${project.id}`)}
-                  className="hidden md:table-cell md:w-[18%] cursor-pointer"
-                >
+                <div className="hidden md:table-cell md:w-[18%]">
                   {formatDistanceToNow(project.updatedAt, {
                     addSuffix: true,
                   })}
