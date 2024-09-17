@@ -15,7 +15,7 @@ export const TemplatesSection = () => {
 
   const { data, isLoading, isError } = useGetTemplates({
     page: '1',
-    limit: '5',
+    limit: '4',
   });
 
   const onClick = (template: ResponseType['data'][0]) => {
@@ -66,7 +66,7 @@ export const TemplatesSection = () => {
   return (
     <div className="text-[#262E3C]">
       <h3 className="font-extrabold text-lg">Start from a template</h3>
-      <div className="grid grid-cols-3 md:grid-cols-5 mt-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 mt-4 gap-4">
         {data?.map((template) => (
           <TemplateCard
             key={template.id}

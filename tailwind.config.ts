@@ -76,22 +76,22 @@ const config = {
             transform: 'translateY(-4px) scale(120%)',
           },
           '10%': {
-            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(24deg)',
           },
           '15%': {
-            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-24deg)',
           },
           '20%': {
-            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(24deg)',
           },
           '25%': {
-            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-24deg)',
           },
           '30%': {
-            transform: 'translateY(-4px) scale(120%) rotate(17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(24deg)',
           },
           '35%': {
-            transform: 'translateY(-4px) scale(120%) rotate(-17deg)',
+            transform: 'translateY(-4px) scale(120%) rotate(-24deg)',
           },
           '40%': {
             transform: 'translateY(-4px) scale(120%) rotate(17deg)',

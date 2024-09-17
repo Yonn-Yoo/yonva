@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { useDeleteProject } from '@/features/projects/api/use-delete-project';
 import { useDuplicateProject } from '@/features/projects/api/use-duplicate-project';
 import { useGetProjects } from '@/features/projects/api/use-get-projects';
@@ -24,7 +23,6 @@ import {
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
 export const ProjectsSection = () => {
   const [ConfirmDialog, confirm] = useConfirm(
@@ -89,66 +87,70 @@ export const ProjectsSection = () => {
     <div className="space-y-4">
       <ConfirmDialog />
       <h3 className="text-[#262E3C] font-extrabold text-lg">{`${name}'s recent projects`}</h3>
-      <Table className="!text-[#262E3C]">
-        <TableBody>
-          {data.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.data.map((project) => (
-                <TableRow key={project.id}>
-                  <TableCell
-                    onClick={() => router.push(`/editor/${project.id}`)}
-                    className="font-medium flex items-center gap-x-2 cursor-pointer"
-                  >
-                    <FileIcon className="size-6" />
+      <section className="w-full !text-[#262E3C] border-separate">
+        {data.pages.map((group, idx) => (
+          <div className="w-full flex flex-col space-y-3.5" key={idx}>
+            {group.data.map((project) => (
+              <div
+                className="w-full flex justify-between items-center bg-slate-50 py-4 px-6 rounded-lg duration-300 hover:!shadow-gray-200 hover:shadow-md cursor-pointer hover:scale-[101%] group"
+                key={project.id}
+              >
+                <div
+                  onClick={() => router.push(`/editor/${project.id}`)}
+                  className="w-full md:w-[30%] h-10 font-medium flex items-center space-x-2 cursor-pointer"
+                >
+                  <FileIcon className="size-6" />
+                  <span className="w-fit line-clamp-1 relative">
                     {project.name}
-                  </TableCell>
-                  <TableCell
-                    onClick={() => router.push(`/editor/${project.id}`)}
-                    className="hidden md:table-cell cursor-pointer"
-                  >
-                    {project.width} x {project.height} px
-                  </TableCell>
-                  <TableCell
-                    onClick={() => router.push(`/editor/${project.id}`)}
-                    className="hidden md:table-cell cursor-pointer"
-                  >
-                    {formatDistanceToNow(project.updatedAt, {
-                      addSuffix: true,
-                    })}
-                  </TableCell>
-                  <TableCell className="flex items-center justify-end">
-                    <DropdownMenu modal={false}>
-                      <DropdownMenuTrigger asChild>
-                        <Button disabled={false} size="icon" variant="ghost">
-                          <MoreHorizontal className="size-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-60">
-                        <DropdownMenuItem
-                          className="h-10 cursor-pointer"
-                          disabled={duplicateMutation.isPending}
-                          onClick={() => onCopy(project.id)}
-                        >
-                          <CopyIcon className="size-4 mr-2" />
-                          Make a copy
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="h-10 cursor-pointer"
-                          disabled={removeMutation.isPending}
-                          onClick={() => onDelete(project.id)}
-                        >
-                          <Trash className="size-4 mr-2" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </React.Fragment>
-          ))}
-        </TableBody>
-      </Table>
+                    <div className="w-0 group-hover:w-full hover:w-full h-px bg-black/40 rounded-lg duration-300" />
+                  </span>
+                </div>
+                <div
+                  onClick={() => router.push(`/editor/${project.id}`)}
+                  className="hidden md:table-cell md:w-[18%] cursor-pointer"
+                >
+                  {project.width} x {project.height} px
+                </div>
+                <div
+                  onClick={() => router.push(`/editor/${project.id}`)}
+                  className="hidden md:table-cell md:w-[18%] cursor-pointer"
+                >
+                  {formatDistanceToNow(project.updatedAt, {
+                    addSuffix: true,
+                  })}
+                </div>
+                <div className="flex items-center justify-end">
+                  <DropdownMenu modal={false}>
+                    <DropdownMenuTrigger asChild>
+                      <Button disabled={false} size="icon" variant="ghost">
+                        <MoreHorizontal className="size-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-60">
+                      <DropdownMenuItem
+                        className="h-10 cursor-pointer"
+                        disabled={duplicateMutation.isPending}
+                        onClick={() => onCopy(project.id)}
+                      >
+                        <CopyIcon className="size-4 mr-2" />
+                        Make a copy
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        className="h-10 cursor-pointer"
+                        disabled={removeMutation.isPending}
+                        onClick={() => onDelete(project.id)}
+                      >
+                        <Trash className="size-4 mr-2" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </section>
       {hasNextPage && (
         <div className="w-full flex items-center justify-center pt-4">
           <Button
