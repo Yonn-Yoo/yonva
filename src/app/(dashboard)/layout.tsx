@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: Props) {
     <div className="bg-muted h-full">
       <div className="flex flex-col h-full">
         <Navbar />
-        <main className="flex-1 overflow-auto p-6 pt-12 w-full mx-auto lg:rounded-tl-2xl">
+        <main className="flex-1 overflow-auto p-6 pt-6 md:pt-12 w-full mx-auto lg:rounded-tl-2xl">
           {children}
         </main>
       </div>

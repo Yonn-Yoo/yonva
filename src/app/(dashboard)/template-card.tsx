@@ -30,14 +30,14 @@ export const TemplateCard = ({
       )}
     >
       <div
-        style={{ aspectRatio: `${width}/${height}` }}
+        style={{ aspectRatio: '3/4' }}
         className="relative rounded-xl h-full w-full overflow-hidden border"
       >
         <Image
           fill
           src={imageSrc}
           alt={title}
-          className=" object-cover transition duration-500 transform group-hover:scale-105"
+          className="object-cover transition duration-500 transform group-hover:scale-105"
         />
 
         <div className="opacity-0 group-hover:opacity-100 transition duration-500 absolute inset-0 bg-black/50 flex items-center justify-center rounded-xl backdrop-filter backdrop-blur-sm">

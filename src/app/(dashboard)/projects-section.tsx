@@ -15,9 +15,9 @@ import { formatDistanceToNow } from 'date-fns';
 import {
   AlertTriangle,
   CopyIcon,
-  FileIcon,
   Loader,
   MoreHorizontal,
+  Presentation,
   Search,
   Trash,
 } from 'lucide-react';
@@ -97,9 +97,9 @@ export const ProjectsSection = () => {
               >
                 <div
                   onClick={() => router.push(`/editor/${project.id}`)}
-                  className="w-full md:w-[30%] h-10 font-medium flex items-center space-x-2 cursor-pointer"
+                  className="w-full md:w-[30%] h-10 font-medium flex items-center space-x-3 cursor-pointer"
                 >
-                  <FileIcon className="size-6" />
+                  <Presentation className="size-5" />
                   <span className="w-fit line-clamp-1 relative">
                     {project.name}
                     <div className="w-0 group-hover:w-full h-px bg-black/40 rounded-lg duration-500 ease-in-out" />
@@ -117,7 +117,7 @@ export const ProjectsSection = () => {
                   <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
                       <Button disabled={false} size="icon" variant="ghost">
-                        <MoreHorizontal className="size-4" />
+                        <MoreHorizontal className="size-4 text-gray-400" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-60">
