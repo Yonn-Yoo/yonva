@@ -29,7 +29,11 @@ export const useGetTemplates = (apiQuery: RequestType) => {
       }
 
       const { data } = await response.json();
-      return data;
+      const formattedData = data.sort(
+        (a: any, b: any) => +new Date(b.updatedAt) - +new Date(a.updatedAt)
+      );
+      console.log(formattedData);
+      return formattedData;
     },
   });
 
