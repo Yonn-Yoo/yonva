@@ -12,6 +12,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'aiyfra12dr.ufs.sh',
+      },
+      {
+        protocol: 'https',
         hostname: 'replicate.delivery',
       },
     ],
